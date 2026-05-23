@@ -55,7 +55,7 @@ function PortfolioApp() {
           <About />
 
           {/* ── Bar dissolve divider ─────────── */}
-          <BarDivider barCount={80} height={160} color="var(--gold)" />
+          <BarDivider barCount={40} height={160} color="var(--gold)" />
 
           {/* ── Projects ─────────────────────── */}
           <Projects />
@@ -76,7 +76,7 @@ function PortfolioApp() {
           <DSA />
 
           {/* ── Bar divider (inverted — more sparse) ── */}
-          <BarDivider barCount={60} height={120} color="rgba(201,169,110,0.4)" />
+          <BarDivider barCount={30} height={120} color="rgba(201,169,110,0.4)" />
 
           {/* ── Skills ───────────────────────── */}
           <Skills />
@@ -97,7 +97,7 @@ function PortfolioApp() {
           <Location />
 
           {/* ── Final bar divider ────────────── */}
-          <BarDivider barCount={100} height={200} color="var(--gold)" />
+          <BarDivider barCount={50} height={200} color="var(--gold)" />
 
           {/* ── Contact ──────────────────────── */}
           <Contact />

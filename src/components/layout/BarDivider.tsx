@@ -8,8 +8,8 @@ interface BarDividerProps {
 }
 
 export default function BarDivider({
-  barCount = 80,
-  height = 180,
+  barCount = 40,       // reduced default — was 80
+  height = 160,
   color = 'var(--gold)',
 }: BarDividerProps) {
   const ref = useRef<HTMLDivElement>(null)
@@ -18,8 +18,9 @@ export default function BarDivider({
     offset: ['start end', 'end start'],
   })
 
+  // Pre-compute all bar heights
   const bars = Array.from({ length: barCount }, (_, i) => {
-    const x    = i / barCount
+    const x     = i / barCount
     const sine1 = Math.sin(x * Math.PI) * 0.85
     const sine2 = Math.sin(x * Math.PI * 3) * 0.15
     const noise = Math.sin(x * 17.3 + 2.1) * 0.08 + Math.sin(x * 7.7) * 0.06
@@ -33,6 +34,7 @@ export default function BarDivider({
         width: '100%', height,
         display: 'flex', alignItems: 'flex-end',
         overflow: 'hidden', position: 'relative',
+        contain: 'strict',   // CSS containment — prevents layout recalc outside
       }}
     >
       {bars.map((barH, i) => (
@@ -49,7 +51,6 @@ export default function BarDivider({
   )
 }
 
-// ─── Each bar is its own component so hooks are called at component level ─────
 function ScrollBar({
   maxHeight,
   scrollYProgress,
@@ -68,7 +69,6 @@ function ScrollBar({
   const start    = 0.1 + distance * 0.15
   const end      = Math.min(start + 0.35, 0.75)
 
-  // ✅ Hook at component top level — not inside map
   const scaleY = useTransform(scrollYProgress, [start, end], [0, 1])
 
   return (
@@ -81,6 +81,7 @@ function ScrollBar({
         transformOrigin: 'bottom',
         scaleY,
         marginRight: 1,
+        willChange: 'transform',
       }}
     />
   )

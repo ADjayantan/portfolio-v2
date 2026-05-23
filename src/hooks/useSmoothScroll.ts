@@ -1,15 +1,11 @@
 import { useEffect } from 'react'
 import Lenis from '@studio-freight/lenis'
 
-/**
- * Initialises Lenis smooth scroll on mount.
- * Drop into App.tsx — call once at the root level.
- */
 export function useSmoothScroll() {
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.35,
-      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      duration: 0.85,                          // was 1.35 — too sluggish
+      easing: (t: number) => 1 - Math.pow(1 - t, 3),   // simpler cubic ease-out
       orientation: 'vertical',
       smoothWheel: true,
     })
@@ -19,9 +15,9 @@ export function useSmoothScroll() {
       requestAnimationFrame(raf)
     }
 
-    requestAnimationFrame(raf)
-
+    const id = requestAnimationFrame(raf)
     return () => {
+      cancelAnimationFrame(id)
       lenis.destroy()
     }
   }, [])
