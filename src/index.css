@@ -23,7 +23,8 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /* scroll-behavior: smooth removed — Lenis handles smooth scrolling;
+     having both causes sluggish/doubled easing */
 }
 
 body {
@@ -66,6 +67,11 @@ img { max-width: 100%; display: block; }
 .lx-section {
   padding: 120px 0;
   position: relative;
+}
+
+/* Force GPU compositing on animated elements to reduce scroll jank */
+.lx-section > * {
+  transform: translateZ(0);
 }
 
 .lx-container {
