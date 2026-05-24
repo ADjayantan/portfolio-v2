@@ -44,7 +44,7 @@ export default function Navbar() {
   }, [])
 
   const scrollTo = (href: string) => {
-    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
+    document.querySelector(href)?.scrollIntoView({ behavior: 'instant' as ScrollBehavior })
     setMenuOpen(false)
   }
 
@@ -64,7 +64,7 @@ export default function Navbar() {
       >
         {/* Logo */}
         <button
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          onClick={() => window.scrollTo({ top: 0, behavior: 'instant' as unknown as ScrollBehavior })}
           style={{
             background: 'none', border: 'none',
             fontFamily: 'var(--font-serif)', fontSize: '1.5rem',
