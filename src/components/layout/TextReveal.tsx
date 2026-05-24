@@ -106,10 +106,10 @@ interface ImageWipeProps {
 export function ImageWipe({ src, alt, style, delay = 0 }: ImageWipeProps) {
   return (
     <motion.div
-      initial={{ clipPath: 'inset(0 100% 0 0)' }}
-      whileInView={{ clipPath: 'inset(0 0% 0 0)' }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 1.1, delay, ease: [0.76, 0, 0.24, 1] }}
+      initial={{ opacity: 0, scale: 1.04 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true, amount: 0 }}
+      transition={{ duration: 0.9, delay, ease: [0.33, 1, 0.68, 1] }}
       style={style}
     >
       <img
