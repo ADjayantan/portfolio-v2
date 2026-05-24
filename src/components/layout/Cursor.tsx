@@ -13,11 +13,22 @@ export default function Cursor() {
   const scale   = useSpring(scaleVal, { stiffness: 200, damping: 20 })
 
   useEffect(() => {
+    // Throttle via rAF so cursor updates don't block scroll thread
+    let rafPending = false
+    let lastX = -100, lastY = -100
     const move = (e: MouseEvent) => {
-      cursorX.set(e.clientX)
-      cursorY.set(e.clientY)
-      trailX.set(e.clientX)
-      trailY.set(e.clientY)
+      lastX = e.clientX
+      lastY = e.clientY
+      if (!rafPending) {
+        rafPending = true
+        requestAnimationFrame(() => {
+          cursorX.set(lastX)
+          cursorY.set(lastY)
+          trailX.set(lastX)
+          trailY.set(lastY)
+          rafPending = false
+        })
+      }
     }
 
     const enterHover = () => scaleVal.set(2.2)
