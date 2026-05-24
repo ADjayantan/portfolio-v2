@@ -15,6 +15,6 @@ export const profile: Profile = {
     leetcode: 'https://leetcode.com/u/jayantan/',
     // Normalise BASE_URL: Vite sets it to '/portfolio-v2/' in prod and '/' in dev.
     // We strip trailing slashes and leading slashes so the path always resolves correctly.
-    resume: `${import.meta.env.BASE_URL.replace(/\/$/, '')}/Jayantan_AD_Resume.pdf`,
+    resume: `${import.meta.env.BASE_URL}Jayantan_AD_Resume.pdf`,
   },
 };
