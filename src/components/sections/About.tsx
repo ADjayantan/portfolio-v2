@@ -49,22 +49,20 @@ export default function About() {
           style={{ display: 'grid', gridTemplateColumns: '200px 1fr', gap: 64, alignItems: 'start' }}
           className="about-grid"
         >
-          {/* Photo — wipe reveal (Parallax removed: overflow:hidden clips image and breaks IntersectionObserver) */}
+          {/* Photo */}
           <div style={{ position: 'relative' }}>
-            <div style={{ width: 200, height: 260 }}>
-              <ImageWipe
-                src={`${import.meta.env.BASE_URL}profile.png`}
-                alt="AD Jayantan"
-                style={{ width: 200, height: 260, border: '1px solid var(--border-light)' }}
-              />
-            </div>
-            {/* Gold corner accent */}
-            <div style={{
-              position: 'absolute', bottom: -8, right: -8,
-              width: 40, height: 40,
-              border: '1px solid var(--gold)', opacity: 0.4,
-              pointerEvents: 'none',
-            }} />
+            <ImageWipe
+              src={`${import.meta.env.BASE_URL}profile.png`}
+              alt="AD Jayantan"
+              style={{
+                width: 200,
+                height: 260,
+                borderRadius: 24,
+                overflow: 'hidden',
+                boxShadow: '0 8px 40px rgba(0,0,0,0.55), 0 0 0 1px rgba(201,169,110,0.12)',
+                background: '#0b0b0b',
+              }}
+            />
             <p style={{
               fontFamily: 'var(--font-mono)', fontSize: '8px',
               letterSpacing: '0.25em', textTransform: 'uppercase',
