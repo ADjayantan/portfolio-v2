@@ -13,8 +13,6 @@ export const profile: Profile = {
     github: 'https://github.com/ADjayantan',
     linkedin: 'https://www.linkedin.com/in/ad-jayantan-766886320/',
     leetcode: 'https://leetcode.com/u/jayantan/',
-    // Normalise BASE_URL: Vite sets it to '/portfolio-v2/' in prod and '/' in dev.
-    // We strip trailing slashes and leading slashes so the path always resolves correctly.
     resume: `${import.meta.env.BASE_URL}Jayantan_AD_Resume.pdf`,
   },
 };
