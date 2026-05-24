@@ -110,12 +110,22 @@ export function ImageWipe({ src, alt, style, delay = 0 }: ImageWipeProps) {
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true, amount: 0 }}
       transition={{ duration: 0.9, delay, ease: [0.33, 1, 0.68, 1] }}
-      style={style}
+      style={{
+        overflow: 'hidden',       // clips img to borderRadius
+        ...style,
+      }}
     >
       <img
         src={src}
         alt={alt}
-        style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+        style={{
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          display: 'block',
+          borderRadius: 'inherit', // inherits from wrapper
+          transition: 'transform 0.6s ease',
+        }}
       />
     </motion.div>
   )
