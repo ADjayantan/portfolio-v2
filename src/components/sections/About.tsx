@@ -53,7 +53,7 @@ export default function About() {
           <div style={{ position: 'relative' }}>
             <Parallax speed={-0.15} style={{ width: 200, height: 240 }}>
               <ImageWipe
-                src={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/profile.png`}
+                src={`${import.meta.env.BASE_URL}profile.png`}
                 alt="AD Jayantan"
                 style={{ width: 200, height: 260, border: '1px solid var(--border-light)' }}
               />
