@@ -49,15 +49,15 @@ export default function About() {
           style={{ display: 'grid', gridTemplateColumns: '200px 1fr', gap: 64, alignItems: 'start' }}
           className="about-grid"
         >
-          {/* Photo — parallax + wipe reveal */}
+          {/* Photo — wipe reveal (Parallax removed: overflow:hidden clips image and breaks IntersectionObserver) */}
           <div style={{ position: 'relative' }}>
-            <Parallax speed={-0.15} style={{ width: 200, height: 240 }}>
+            <div style={{ width: 200, height: 260 }}>
               <ImageWipe
                 src={`${import.meta.env.BASE_URL}profile.png`}
                 alt="AD Jayantan"
                 style={{ width: 200, height: 260, border: '1px solid var(--border-light)' }}
               />
-            </Parallax>
+            </div>
             {/* Gold corner accent */}
             <div style={{
               position: 'absolute', bottom: -8, right: -8,
