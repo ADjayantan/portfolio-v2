@@ -139,7 +139,8 @@ export default function Hero() {
     }
   }, [displayed, typing, taglineIdx])
 
-  const scrollTo = (href: string) => document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
+  // Use 'instant' so Lenis intercepts and animates it — 'smooth' + Lenis = double easing
+  const scrollTo = (href: string) => document.querySelector(href)?.scrollIntoView({ behavior: 'instant' as ScrollBehavior })
 
   return (
     <section
