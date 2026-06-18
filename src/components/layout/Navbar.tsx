@@ -268,6 +268,10 @@ export default function Navbar() {
           }
           .nav-desktop { display: none !important; }
           .nav-mobile-controls { display: flex !important; }
+          .nav-mobile-controls button {
+            color: var(--cream) !important;
+            border-color: var(--gold-border) !important;
+          }
         }
       `}</style>
     </>
