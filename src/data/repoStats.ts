@@ -14,5 +14,17 @@ export const repoStats: Record<string, { stars: number; forks: number }> = {
   "signbridge": {
     "stars": 0,
     "forks": 0
+  },
+  "medplus": {
+    "stars": 0,
+    "forks": 0
+  },
+  "vaithiyam": {
+    "stars": 0,
+    "forks": 0
+  },
+  "devtrack": {
+    "stars": 0,
+    "forks": 0
   }
 }

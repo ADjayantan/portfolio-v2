@@ -66,4 +66,55 @@ export const projects: Project[] = [
     },
     accent: '#f59e0b',
   },
+  {
+    id: 'medplus',
+    title: 'Genezenz Pharmacy',
+    tagline: 'Online pharmacy platform with digital prescription uploading',
+    problem:
+      'Patients find it difficult to purchase prescription medicines remotely, especially when they need to verify medicine availability and upload physical prescriptions securely.',
+    solution:
+      'Built a digital pharmacy storefront supporting medicine search, category filters, shopping cart, and a dedicated prescription uploading portal to streamline ordering.',
+    contributions:
+      'Developed the pharmacy frontend layout and medicine search index. Built the prescription upload pipeline and styled the product catalog with a responsive layout.',
+    tech: ['React', 'TypeScript', 'CSS', 'Vite'],
+    links: {
+      github: 'https://github.com/ADjayantan/medplus',
+      demo: 'https://adjayantan.github.io/medplus/',
+    },
+    accent: '#0d9488',
+  },
+  {
+    id: 'vaithiyam',
+    title: 'Vaithiyam',
+    tagline: 'Traditional Siddha & Ayurveda healthcare platform in Tamil',
+    problem:
+      'Information and consultations for traditional Siddha and Ayurveda medicine are often inaccessible online, and localized interfaces in regional languages like Tamil are rare.',
+    solution:
+      'Developed a localized traditional healthcare portal supporting appointment scheduling, product catalogs, and informative articles entirely in Tamil.',
+    contributions:
+      'Designed the localized Tamil typography and dark-mode leaf aesthetic. Built the appointment booking interface and products directory.',
+    tech: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
+    links: {
+      github: 'https://github.com/ADjayantan/vaithiyam-web',
+      demo: 'https://vaithiyam-web.vercel.app/',
+    },
+    accent: '#d97706',
+  },
+  {
+    id: 'devtrack',
+    title: 'DevTrack v3.0',
+    tagline: 'Developer productivity and progress tracker',
+    problem:
+      'Developers lack a centralized tool to log daily coding hours, track task milestones, view activity trends, and monitor consistency streaks.',
+    solution:
+      'Built a developer dashboard featuring productivity metrics (streaks, tasks, hours), a weekly activity bar chart, goal setting, and a LeetCode challenge progress tracker.',
+    contributions:
+      'Built the dashboard visualization panel and activity charting. Implemented streak counter logic, progress milestone calculations, and custom dark theme.',
+    tech: ['React', 'TypeScript', 'Tailwind CSS', 'Recharts', 'Vite'],
+    links: {
+      github: 'https://github.com/ADjayantan/devtrack-v3',
+      demo: 'https://devtrack-v3.vercel.app/dashboard',
+    },
+    accent: '#0284c7',
+  },
 ];
