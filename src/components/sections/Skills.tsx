@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { skills, levelColors } from '../../data/skills'
+import PixelReveal from '../layout/PixelReveal'
 
 export default function Skills() {
   return (
@@ -12,13 +13,7 @@ export default function Skills() {
         >
           04 — Stack
         </motion.p>
-        <motion.h2
-          className="lx-heading"
-          initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.1 }}
-        >
-          Tech &amp; Tools
-        </motion.h2>
+        <PixelReveal text="Tech & Tools" className="lx-heading" />
 
         <div
           style={{

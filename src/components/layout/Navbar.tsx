@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Moon, Sun } from 'lucide-react'
 import { useTheme } from '../../hooks/useTheme'
 import SoundToggle from './SoundToggle'
+import Magnetic from './Magnetic'
 
 const NAV_LINKS = [
   { label: 'About',    href: '#about' },
@@ -128,47 +129,55 @@ export default function Navbar() {
           })}
 
           {/* Sound toggle */}
-          <SoundToggle />
+          <Magnetic>
+            <SoundToggle />
+          </Magnetic>
 
           {/* Theme toggle */}
-          <button
-            onClick={toggle}
-            style={{
-              background: 'none', border: '1px solid var(--border-light)',
-              width: 34, height: 34,
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              color: 'var(--muted)', cursor: 'pointer',
-              transition: 'color 0.2s, border-color 0.2s',
-              flexShrink: 0,
-            }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--gold)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--gold-border)' }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--muted)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-light)' }}
-            aria-label="Toggle theme"
-          >
-            {theme === 'dark' ? <Sun size={13} strokeWidth={1.5} /> : <Moon size={13} strokeWidth={1.5} />}
-          </button>
+          <Magnetic>
+            <button
+              onClick={toggle}
+              style={{
+                background: 'none', border: '1px solid var(--border-light)',
+                width: 34, height: 34,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                color: 'var(--muted)', cursor: 'pointer',
+                transition: 'color 0.2s, border-color 0.2s',
+                flexShrink: 0,
+              }}
+              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--gold)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--gold-border)' }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--muted)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-light)' }}
+              aria-label="Toggle theme"
+            >
+              {theme === 'dark' ? <Sun size={13} strokeWidth={1.5} /> : <Moon size={13} strokeWidth={1.5} />}
+            </button>
+          </Magnetic>
         </nav>
 
         {/* Mobile controls & hamburger */}
         <div style={{ marginLeft: 'auto', display: 'none', gap: 10, alignItems: 'center' }} className="nav-mobile-controls">
-          <SoundToggle />
+          <Magnetic>
+            <SoundToggle />
+          </Magnetic>
           
-          <button
-            onClick={toggle}
-            style={{
-              background: 'none', border: '1px solid var(--border-light)',
-              width: 34, height: 34,
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              color: 'var(--muted)', cursor: 'pointer',
-              transition: 'color 0.2s, border-color 0.2s',
-              flexShrink: 0,
-            }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--gold)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--gold-border)' }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--muted)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-light)' }}
-            aria-label="Toggle theme"
-          >
-            {theme === 'dark' ? <Sun size={13} strokeWidth={1.5} /> : <Moon size={13} strokeWidth={1.5} />}
-          </button>
+          <Magnetic>
+            <button
+              onClick={toggle}
+              style={{
+                background: 'none', border: '1px solid var(--border-light)',
+                width: 34, height: 34,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                color: 'var(--muted)', cursor: 'pointer',
+                transition: 'color 0.2s, border-color 0.2s',
+                flexShrink: 0,
+              }}
+              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--gold)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--gold-border)' }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--muted)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-light)' }}
+              aria-label="Toggle theme"
+            >
+              {theme === 'dark' ? <Sun size={13} strokeWidth={1.5} /> : <Moon size={13} strokeWidth={1.5} />}
+            </button>
+          </Magnetic>
 
           <button
             onClick={() => setMenuOpen((o) => !o)}

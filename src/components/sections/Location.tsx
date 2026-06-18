@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { MapPin, Building2, Wifi, Navigation } from 'lucide-react'
+import PixelReveal from '../layout/PixelReveal'
 
 const FACTS = [
   { icon: MapPin,    label: 'City',         value: 'Coimbatore, Tamil Nadu, India' },
@@ -19,13 +20,7 @@ export default function Location() {
         >
           05 — Where I Am
         </motion.p>
-        <motion.h2
-          className="lx-heading"
-          initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.1 }}
-        >
-          Coimbatore
-        </motion.h2>
+        <PixelReveal text="Coimbatore" className="lx-heading" />
 
         {/* Map + info split */}
         <div

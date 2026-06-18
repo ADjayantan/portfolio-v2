@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { ExternalLink } from 'lucide-react'
 import { leetcodeStats, githubStats } from '../../data/stats'
 import { profile } from '../../data/profile'
+import PixelReveal from '../layout/PixelReveal'
 
 interface StatItem {
   value: number | string
@@ -135,13 +136,7 @@ export default function DSA() {
         >
           03 — DSA Practice
         </motion.p>
-        <motion.h2
-          className="lx-heading"
-          initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.1 }}
-        >
-          The Numbers
-        </motion.h2>
+        <PixelReveal text="The Numbers" className="lx-heading" />
 
         {/* Stats grid — 3 cols */}
         <div

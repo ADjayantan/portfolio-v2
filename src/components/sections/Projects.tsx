@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ExternalLink, Github, ChevronDown } from 'lucide-react'
 import { projects } from '../../data/projects'
 import { repoStats } from '../../data/repoStats'
+import PixelReveal from '../layout/PixelReveal'
 
 export default function Projects() {
   const [open, setOpen] = useState<string | null>(null)
@@ -17,13 +18,7 @@ export default function Projects() {
         >
           02 — Projects
         </motion.p>
-        <motion.h2
-          className="lx-heading"
-          initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.1 }}
-        >
-          What I've Built
-        </motion.h2>
+        <PixelReveal text="What I've Built" className="lx-heading" />
 
         {/* Project list */}
         <div>
