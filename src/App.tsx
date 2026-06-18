@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { ThemeProvider } from './hooks/useTheme'
+import { AudioProvider } from './hooks/useAudio'
 import { useSmoothScroll } from './hooks/useSmoothScroll'
 import Cursor from './components/layout/Cursor'
 import ProgressBar from './components/layout/ProgressBar'
@@ -113,7 +114,9 @@ function PortfolioApp() {
 export default function App() {
   return (
     <ThemeProvider>
-      <PortfolioApp />
+      <AudioProvider>
+        <PortfolioApp />
+      </AudioProvider>
     </ThemeProvider>
   )
 }

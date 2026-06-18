@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { useTheme } from '../../hooks/useTheme'
 
 interface Particle {
   x: number
@@ -17,6 +18,7 @@ interface Particle {
 }
 
 export default function HeroParticles() {
+  const { theme } = useTheme()
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const mouseRef = useRef({ x: -1000, y: -1000, active: false })
   const shockwaveRef = useRef({ x: -1000, y: -1000, radius: 9999, active: false })
@@ -33,12 +35,19 @@ export default function HeroParticles() {
     const particles: Particle[] = []
     const PARTICLE_COUNT = 150
 
+    const isDark = theme === 'dark'
     // Color definitions in RGB
-    const colors = [
-      { r: 201, g: 169, b: 110 }, // Gold
-      { r: 232, g: 223, b: 200 }, // Cream
-      { r: 110, g: 100, b: 200 }, // Indigo
-    ]
+    const colors = isDark
+      ? [
+          { r: 201, g: 169, b: 110 }, // Gold
+          { r: 232, g: 223, b: 200 }, // Cream
+          { r: 110, g: 100, b: 200 }, // Indigo
+        ]
+      : [
+          { r: 154, g: 111, b: 46 },  // Light Gold
+          { r: 74,  g: 68,  b: 56 },  // Light Text (Dark Brown)
+          { r: 138, g: 126, b: 110 }, // Light Muted
+        ]
 
     // Initialize particles
     const initParticles = (w: number, h: number) => {
@@ -259,9 +268,11 @@ export default function HeroParticles() {
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2)
         ctx.save()
 
-        if (p.glow || insideName) {
+        if ((p.glow || insideName) && isDark) {
           ctx.shadowColor = `rgba(${p.r}, ${p.g}, ${p.b}, ${p.alpha * 0.8})`
           ctx.shadowBlur = insideName ? 10 : 6
+        } else {
+          ctx.shadowBlur = 0
         }
 
         ctx.fillStyle = `rgba(${p.r}, ${p.g}, ${p.b}, ${p.alpha})`
@@ -283,7 +294,7 @@ export default function HeroParticles() {
         parent.removeEventListener('mousedown', handleMouseDown)
       }
     }
-  }, [])
+  }, [theme])
 
   return (
     <canvas
