@@ -109,8 +109,9 @@ function PixelCanvas({ cfg, phase, onDone }: PixelCanvasProps) {
 
     cv.width  = Math.round(w * dpr)
     cv.height = Math.round(h * dpr)
-    cv.style.width  = `${w}px`
-    cv.style.height = `${h}px`
+    cv.style.width    = '100%'
+    cv.style.maxWidth = `${w}px`
+    cv.style.height   = 'auto'
     ctx.scale(dpr, dpr)
 
     stateRef.current = { cells, w, h, phase: 'enter', startT: null, onDone }
