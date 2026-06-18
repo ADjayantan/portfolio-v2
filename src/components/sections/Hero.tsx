@@ -2,6 +2,7 @@ import { useEffect, useState, useRef, useCallback } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { ArrowDown, Github, Linkedin, Code2, Download } from 'lucide-react'
 import { profile } from '../../data/profile'
+import HeroParticles from './HeroParticles'
 
 // ─── constants ────────────────────────────────────────────────────────────────
 const TAGLINES = ['Frontend Developer', 'Problem Solver', 'DSA Practitioner', 'React Craftsman']
@@ -366,6 +367,9 @@ export default function Hero() {
           animation: 'drift-b 26s ease-in-out infinite',
         }} />
       </motion.div>
+
+      {/* ── interactive particles background ── */}
+      <HeroParticles />
 
       {/* ── content ── */}
       <div style={{
