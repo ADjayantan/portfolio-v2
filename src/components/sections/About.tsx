@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { profile } from '../../data/profile'
-import TextReveal, { Parallax, ImageWipe } from '../layout/TextReveal'
+import TextReveal, { ImageWipe } from '../layout/TextReveal'
 
 const DETAILS = [
   { label: 'Degree',   value: profile.degree },
@@ -82,6 +82,7 @@ export default function About() {
             {DETAILS.map((d, i) => (
               <div
                 key={d.label}
+                className="about-detail-row"
                 style={{
                   display: 'grid', gridTemplateColumns: '100px 1fr',
                   gap: 24, padding: '18px 0',
@@ -112,6 +113,11 @@ export default function About() {
       <style>{`
         @media (max-width: 680px) {
           .about-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+          .about-detail-row {
+            grid-template-columns: 1fr !important;
+            gap: 6px !important;
+            padding: 14px 0 !important;
+          }
         }
       `}</style>
     </section>

@@ -96,9 +96,6 @@ export default function Contact() {
                 display: 'flex',
                 alignItems: 'flex-start',
                 gap: 20,
-                padding: '32px 32px',
-                borderRight: i % 2 === 0 ? '1px solid var(--border)' : 'none',
-                borderBottom: i < 2 ? '1px solid var(--border)' : 'none',
                 textDecoration: 'none',
                 transition: 'background 0.25s',
               }}
@@ -167,9 +164,29 @@ export default function Contact() {
       </div>
 
       <style>{`
+        .contact-grid > a {
+          border-right: 1px solid var(--border);
+          border-bottom: 1px solid var(--border);
+          padding: 32px 32px;
+        }
+        @media (min-width: 601px) {
+          .contact-grid > a:nth-child(2n) {
+            border-right: none;
+          }
+          .contact-grid > a:nth-child(n+3) {
+            border-bottom: none;
+          }
+        }
         @media (max-width: 600px) {
           .contact-grid {
             grid-template-columns: 1fr !important;
+          }
+          .contact-grid > a {
+            border-right: none !important;
+            padding: 24px 20px !important;
+          }
+          .contact-grid > a:last-child {
+            border-bottom: none !important;
           }
         }
       `}</style>

@@ -328,8 +328,12 @@ export default function Hero() {
         const t = setTimeout(() => setDisplayed(v => v.slice(0, -1)), 35)
         return () => clearTimeout(t)
       }
-      setTagIdx(i => (i + 1) % TAGLINES.length)
-      setTyping(true)
+      // Wrap in setTimeout to avoid calling setState synchronously within the effect
+      const t = setTimeout(() => {
+        setTagIdx(i => (i + 1) % TAGLINES.length)
+        setTyping(true)
+      }, 500)
+      return () => clearTimeout(t)
     }
   }, [displayed, typing, tagIdx, serifOn])
 

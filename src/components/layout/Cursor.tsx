@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import { motion, useMotionValue, useSpring } from 'framer-motion'
 
 export default function Cursor() {
@@ -55,6 +55,7 @@ export default function Cursor() {
     <>
       {/* Dot — snaps exactly to cursor */}
       <motion.div
+        className="custom-cursor-dot"
         style={{
           position: 'fixed', left: 0, top: 0,
           x: cursorX, y: cursorY,
@@ -68,6 +69,7 @@ export default function Cursor() {
 
       {/* Ring — springs behind cursor */}
       <motion.div
+        className="custom-cursor-ring"
         style={{
           position: 'fixed', left: 0, top: 0,
           x: springX, y: springY,
@@ -81,8 +83,13 @@ export default function Cursor() {
       />
 
       <style>{`
-        @media (hover: none) { * { cursor: auto !important; } }
-        @media (hover: hover) { * { cursor: none !important; } }
+        @media (hover: none) {
+          * { cursor: auto !important; }
+          .custom-cursor-dot, .custom-cursor-ring { display: none !important; }
+        }
+        @media (hover: hover) {
+          * { cursor: none !important; }
+        }
       `}</style>
     </>
   )

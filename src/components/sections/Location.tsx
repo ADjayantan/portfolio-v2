@@ -77,16 +77,15 @@ export default function Location() {
 
           {/* Info panel */}
           <motion.div
+            className="location-info-panel"
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.2 }}
             style={{
-              borderLeft: '1px solid var(--border)',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',
-              padding: '48px 36px',
               background: 'var(--surface)',
             }}
           >
@@ -163,12 +162,10 @@ export default function Location() {
             { city: 'Chennai', time: '6 hrs', mode: 'Train / Bus' },
             { city: 'Bangalore', time: '5 hrs', mode: 'Bus / Road' },
             { city: 'Mumbai', time: '2 hrs', mode: 'Flight' },
-          ].map((d, i) => (
+          ].map((d) => (
             <div
               key={d.city}
               style={{
-                padding: '20px 28px',
-                borderRight: i < 2 ? '1px solid var(--border)' : 'none',
                 display: 'flex',
                 flexDirection: 'column',
                 gap: 4,
@@ -189,9 +186,37 @@ export default function Location() {
       </div>
 
       <style>{`
+        .location-info-panel {
+          border-left: 1px solid var(--border);
+          padding: 48px 36px;
+        }
+        .dist-strip > div {
+          border-right: 1px solid var(--border);
+          padding: 20px 28px;
+        }
+        .dist-strip > div:last-child {
+          border-right: none;
+        }
         @media (max-width: 720px) {
-          .location-grid { grid-template-columns: 1fr !important; }
-          .dist-strip { grid-template-columns: 1fr !important; }
+          .location-grid {
+            grid-template-columns: 1fr !important;
+          }
+          .location-info-panel {
+            border-left: none !important;
+            border-top: 1px solid var(--border) !important;
+            padding: 36px 24px !important;
+          }
+          .dist-strip {
+            grid-template-columns: 1fr !important;
+          }
+          .dist-strip > div {
+            border-right: none !important;
+            border-bottom: 1px solid var(--border);
+            padding: 18px 20px !important;
+          }
+          .dist-strip > div:last-child {
+            border-bottom: none !important;
+          }
         }
       `}</style>
     </section>

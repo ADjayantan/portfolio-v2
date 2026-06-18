@@ -11,7 +11,9 @@ export default function Preloader({ onComplete }: PreloaderProps) {
 
   // Use ref so the effect never needs onComplete in its dep array
   const onCompleteRef = useRef(onComplete)
-  onCompleteRef.current = onComplete
+  useEffect(() => {
+    onCompleteRef.current = onComplete
+  })
 
   useEffect(() => {
     const start    = performance.now()
@@ -27,9 +29,11 @@ export default function Preloader({ onComplete }: PreloaderProps) {
         rafId = requestAnimationFrame(raf)
       } else {
         setCount(100)
-        // Short pause → fade out → reveal content
-        setTimeout(() => setVisible(false), 400)
-        setTimeout(() => onCompleteRef.current(), 1000)
+        // Short pause → fade out & concurrently reveal content to avoid blank screen flash
+        setTimeout(() => {
+          setVisible(false)
+          onCompleteRef.current()
+        }, 400)
       }
     }
 

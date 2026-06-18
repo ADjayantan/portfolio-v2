@@ -43,8 +43,25 @@ export default function Navbar() {
     return () => observers.forEach((o) => o.disconnect())
   }, [])
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [menuOpen])
+
   const scrollTo = (href: string) => {
-    document.querySelector(href)?.scrollIntoView({ behavior: 'instant' as ScrollBehavior })
+    const lenis = (window as Window & { lenis?: { scrollTo: (target: string | number) => void } }).lenis
+    if (lenis) {
+      lenis.scrollTo(href)
+    } else {
+      document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
+    }
     setMenuOpen(false)
   }
 
@@ -64,7 +81,11 @@ export default function Navbar() {
       >
         {/* Logo */}
         <button
-          onClick={() => window.scrollTo({ top: 0, behavior: 'instant' as unknown as ScrollBehavior })}
+          onClick={() => {
+            const lenis = (window as Window & { lenis?: { scrollTo: (target: string | number) => void } }).lenis
+            if (lenis) lenis.scrollTo(0)
+            else window.scrollTo({ top: 0, behavior: 'smooth' })
+          }}
           style={{
             background: 'none', border: 'none',
             fontFamily: 'var(--font-serif)', fontSize: '1.5rem',
@@ -128,19 +149,61 @@ export default function Navbar() {
           </button>
         </nav>
 
-        {/* Mobile hamburger */}
+        {/* Mobile controls & hamburger */}
         <div style={{ marginLeft: 'auto', display: 'none', gap: 10, alignItems: 'center' }} className="nav-mobile-controls">
-          <button onClick={toggle} style={{ background: 'none', border: 'none', color: 'var(--muted)', cursor: 'pointer', display: 'flex' }}>
-            {theme === 'dark' ? <Sun size={15} strokeWidth={1.5} /> : <Moon size={15} strokeWidth={1.5} />}
+          <SoundToggle />
+          
+          <button
+            onClick={toggle}
+            style={{
+              background: 'none', border: '1px solid var(--border-light)',
+              width: 34, height: 34,
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              color: 'var(--muted)', cursor: 'pointer',
+              transition: 'color 0.2s, border-color 0.2s',
+              flexShrink: 0,
+            }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--gold)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--gold-border)' }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--muted)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-light)' }}
+            aria-label="Toggle theme"
+          >
+            {theme === 'dark' ? <Sun size={13} strokeWidth={1.5} /> : <Moon size={13} strokeWidth={1.5} />}
           </button>
+
           <button
             onClick={() => setMenuOpen((o) => !o)}
-            style={{ background: 'none', border: 'none', color: 'var(--text)', display: 'flex', flexDirection: 'column', gap: 5, padding: 4, cursor: 'pointer' }}
+            style={{
+              background: 'none', border: 'none', color: 'var(--text)',
+              display: 'flex', flexDirection: 'column', gap: 5, padding: '12px 6px',
+              cursor: 'pointer', justifyContent: 'center', alignItems: 'center',
+              width: 34, height: 34, position: 'relative', zIndex: 1001,
+            }}
             aria-label="Toggle menu"
           >
-            {[0, 1, 2].map((i) => (
-              <span key={i} style={{ display: 'block', width: 22, height: 1, background: menuOpen ? 'var(--gold)' : 'var(--text)', transition: 'background 0.2s' }} />
-            ))}
+            {[0, 1, 2].map((i) => {
+              let transform = 'none'
+              let opacity = 1
+              if (menuOpen) {
+                if (i === 0) transform = 'translateY(6px) rotate(45deg)'
+                if (i === 1) opacity = 0
+                if (i === 2) transform = 'translateY(-6px) rotate(-45deg)'
+              }
+              return (
+                <span
+                  key={i}
+                  style={{
+                    display: 'block',
+                    width: 22,
+                    height: 1,
+                    background: menuOpen ? 'var(--gold)' : 'var(--text)',
+                    transform,
+                    opacity,
+                    transition: 'transform 0.3s ease, opacity 0.3s ease, background 0.3s ease',
+                    transformOrigin: 'center',
+                  }}
+                />
+              )
+            })}
           </button>
         </div>
       </header>

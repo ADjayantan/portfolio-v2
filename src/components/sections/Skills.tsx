@@ -36,11 +36,6 @@ export default function Skills() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6, delay: ci * 0.1 }}
-              style={{
-                padding: '40px 40px',
-                borderRight: ci % 2 === 0 ? '1px solid var(--border)' : 'none',
-                borderBottom: ci < 2 ? '1px solid var(--border)' : 'none',
-              }}
             >
               {/* Category label */}
               <p style={{
@@ -126,9 +121,29 @@ export default function Skills() {
       </div>
 
       <style>{`
+        .skills-grid > div {
+          border-right: 1px solid var(--border);
+          border-bottom: 1px solid var(--border);
+          padding: 40px 40px;
+        }
+        @media (min-width: 641px) {
+          .skills-grid > div:nth-child(2n) {
+            border-right: none;
+          }
+          .skills-grid > div:nth-child(n+3) {
+            border-bottom: none;
+          }
+        }
         @media (max-width: 640px) {
           .skills-grid {
             grid-template-columns: 1fr !important;
+          }
+          .skills-grid > div {
+            border-right: none !important;
+            padding: 32px 24px !important;
+          }
+          .skills-grid > div:last-child {
+            border-bottom: none !important;
           }
         }
       `}</style>
