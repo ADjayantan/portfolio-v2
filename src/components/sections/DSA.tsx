@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { ExternalLink } from 'lucide-react'
-import { leetcodeStats } from '../../data/stats'
+import { leetcodeStats, githubStats } from '../../data/stats'
 import { profile } from '../../data/profile'
 
 interface StatItem {
@@ -13,11 +13,11 @@ interface StatItem {
 
 const STATS: StatItem[] = [
   { value: leetcodeStats.total,         label: 'Problems Solved',  sub: `Easy ${leetcodeStats.easy} · Med ${leetcodeStats.medium} · Hard ${leetcodeStats.hard}` },
-  { value: leetcodeStats.maxStreak,     label: 'Day Streak',       sub: '100 Days Badge 2026' },
-  { value: leetcodeStats.contestRating, label: 'Contest Rating',   sub: 'Top 59% globally' },
-  { value: leetcodeStats.activeDays,    label: 'Active Days',      sub: 'Total days with submissions' },
-  { value: leetcodeStats.badges,        label: 'Badges Earned',    sub: 'LeetCode achievements' },
-  { value: 'Daily',                     label: 'Practice Cadence', sub: 'Arrays, Trees, Recursion', isText: true },
+  { value: leetcodeStats.contestRating, label: 'Contest Rating',   sub: 'LeetCode rating' },
+  { value: leetcodeStats.maxStreak,     label: 'Active Streak',    sub: `Max streak: ${leetcodeStats.maxStreak} days` },
+  { value: githubStats.repos,           label: 'Public Repos',     sub: 'Open-source codebases' },
+  { value: githubStats.stars,           label: 'Total Stars',      sub: 'Received stargazers' },
+  { value: githubStats.followers,       label: 'GitHub Followers', sub: 'Social connections' },
 ]
 
 function useCountUp(target: number, duration = 1600, start = false) {

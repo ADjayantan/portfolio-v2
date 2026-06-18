@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ExternalLink, Github, ChevronDown } from 'lucide-react'
 import { projects } from '../../data/projects'
+import { repoStats } from '../../data/repoStats'
 
 export default function Projects() {
   const [open, setOpen] = useState<string | null>(null)
@@ -28,6 +29,7 @@ export default function Projects() {
         <div>
           {projects.map((project, i) => {
             const isOpen = open === project.id
+            const stats = repoStats[project.id] || { stars: 0, forks: 0 }
             return (
               <motion.div
                 key={project.id}
@@ -191,9 +193,19 @@ export default function Projects() {
                               target="_blank"
                               rel="noreferrer"
                               className="btn-ghost"
-                              style={{ justifyContent: 'center', fontSize: '9px' }}
+                              style={{ justifyContent: 'center', fontSize: '9px', display: 'inline-flex', alignItems: 'center', gap: 8 }}
                             >
                               <Github size={12} /> GitHub
+                              {stats.stars > 0 && (
+                                <span style={{ marginLeft: 6, display: 'inline-flex', alignItems: 'center', gap: 2, color: 'var(--gold)' }}>
+                                  ★ {stats.stars}
+                                </span>
+                              )}
+                              {stats.forks > 0 && (
+                                <span style={{ marginLeft: 6, display: 'inline-flex', alignItems: 'center', gap: 2 }}>
+                                  ⌥ {stats.forks}
+                                </span>
+                              )}
                             </a>
                           )}
                           {project.links.demo && (

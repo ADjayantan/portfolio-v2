@@ -1,23 +1,31 @@
-import type { LeetCodeStats } from '../types';
+import type { LeetCodeStats, GitHubStats } from '../types'
 
-// Real data sourced from LeetCode profile screenshot — May 2026
+// Automated daily update from LeetCode GraphQL API
 export const leetcodeStats: LeetCodeStats = {
-  total: 144,
-  easy: 123,
-  medium: 20,
-  hard: 1,
-  contestRating: 1458,
-  globalRanking: '514,929 / 874,510',
-  activeDays: 103,
-  maxStreak: 97,
-  badges: 2,
-};
+  "total": 166,
+  "easy": 140,
+  "medium": 25,
+  "hard": 1,
+  "contestRating": 1458,
+  "globalRanking": 514899,
+  "activeDays": 127,
+  "maxStreak": 106,
+  "badges": 2
+}
 
-// Repos to feature (from GitHub profile)
+// Automated daily update from GitHub REST API
+export const githubStats: GitHubStats = {
+  "repos": 19,
+  "followers": 2,
+  "stars": 1,
+  "forks": 0
+}
+
+// Repos to feature
 export const featuredRepos = [
   'AD-Jayantan-',
   'Jayantan-',
   'My-portflio',
   'signbridge-',
   'studio',
-];
+]

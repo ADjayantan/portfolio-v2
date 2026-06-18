@@ -47,10 +47,17 @@ export interface LeetCodeStats {
   medium: number;
   hard: number;
   contestRating: number;
-  globalRanking: string;
+  globalRanking: string | number;
   activeDays: number;
   maxStreak: number;
   badges: number;
+}
+
+export interface GitHubStats {
+  repos: number;
+  followers: number;
+  stars: number;
+  forks: number;
 }
 
 export interface GitHubRepo {
