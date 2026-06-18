@@ -69,11 +69,12 @@ export default function Navbar() {
   return (
     <>
       <header
+        className="lx-header"
         style={{
           position: 'fixed', top: 0, left: 0, right: 0,
           zIndex: 1000, height: 64,
           display: 'flex', alignItems: 'center',
-          padding: '0 40px', gap: 16,
+          gap: 16,
           transition: 'background 0.4s, border-color 0.4s',
           background: scrolled ? 'rgba(7,8,12,0.88)' : 'transparent',
           backdropFilter: scrolled ? 'blur(16px)' : 'none',
@@ -179,41 +180,56 @@ export default function Navbar() {
             </button>
           </Magnetic>
 
-          <button
-            onClick={() => setMenuOpen((o) => !o)}
-            style={{
-              background: 'none', border: 'none', color: 'var(--text)',
-              display: 'flex', flexDirection: 'column', gap: 5, padding: '12px 6px',
-              cursor: 'pointer', justifyContent: 'center', alignItems: 'center',
-              width: 34, height: 34, position: 'relative', zIndex: 1001,
-            }}
-            aria-label="Toggle menu"
-          >
-            {[0, 1, 2].map((i) => {
-              let transform = 'none'
-              let opacity = 1
-              if (menuOpen) {
-                if (i === 0) transform = 'translateY(6px) rotate(45deg)'
-                if (i === 1) opacity = 0
-                if (i === 2) transform = 'translateY(-6px) rotate(-45deg)'
-              }
-              return (
-                <span
-                  key={i}
-                  style={{
-                    display: 'block',
-                    width: 22,
-                    height: 1,
-                    background: menuOpen ? 'var(--gold)' : 'var(--text)',
-                    transform,
-                    opacity,
-                    transition: 'transform 0.3s ease, opacity 0.3s ease, background 0.3s ease',
-                    transformOrigin: 'center',
-                  }}
-                />
-              )
-            })}
-          </button>
+          <Magnetic>
+            <button
+              onClick={() => setMenuOpen((o) => !o)}
+              style={{
+                background: 'none',
+                border: '1px solid var(--border-light)',
+                width: 34,
+                height: 34,
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 4,
+                justifyContent: 'center',
+                alignItems: 'center',
+                color: 'var(--muted)',
+                cursor: 'pointer',
+                transition: 'color 0.2s, border-color 0.2s',
+                flexShrink: 0,
+                position: 'relative',
+                zIndex: 1001,
+              }}
+              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--gold)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--gold-border)' }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--muted)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-light)' }}
+              aria-label="Toggle menu"
+            >
+              {[0, 1, 2].map((i) => {
+                let transform = 'none'
+                let opacity = 1
+                if (menuOpen) {
+                  if (i === 0) transform = 'translateY(5.5px) rotate(45deg)'
+                  if (i === 1) opacity = 0
+                  if (i === 2) transform = 'translateY(-5.5px) rotate(-45deg)'
+                }
+                return (
+                  <span
+                    key={i}
+                    style={{
+                      display: 'block',
+                      width: 16,
+                      height: 1.5,
+                      background: menuOpen ? 'var(--gold)' : 'currentColor',
+                      transform,
+                      opacity,
+                      transition: 'transform 0.3s ease, opacity 0.3s ease, background 0.3s ease',
+                      transformOrigin: 'center',
+                    }}
+                  />
+                )
+              })}
+            </button>
+          </Magnetic>
         </div>
       </header>
 
@@ -243,7 +259,13 @@ export default function Navbar() {
       )}
 
       <style>{`
+        .lx-header {
+          padding: 0 40px;
+        }
         @media (max-width: 768px) {
+          .lx-header {
+            padding: 0 16px !important;
+          }
           .nav-desktop { display: none !important; }
           .nav-mobile-controls { display: flex !important; }
         }
