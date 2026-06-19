@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { MapPin, Building2, Wifi, Navigation } from 'lucide-react'
 import PixelReveal from '../layout/PixelReveal'
@@ -9,7 +10,155 @@ const FACTS = [
   { icon: Navigation,label: 'Nearest Hub',  value: 'Chennai — 6 hrs · Bangalore — 5 hrs' },
 ]
 
+function calculateHaversine(lat1: number, lon1: number, lat2: number, lon2: number): number {
+  const R = 6371 // Earth's radius in km
+  const dLat = ((lat2 - lat1) * Math.PI) / 180
+  const dLon = ((lon2 - lon1) * Math.PI) / 180
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos((lat1 * Math.PI) / 180) *
+      Math.cos((lat2 * Math.PI) / 180) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2)
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+  return Math.round(R * c)
+}
+
+type HudStatus = 'idle' | 'pinging' | 'resolving_ip' | 'success' | 'failed'
+
 export default function Location() {
+  const [localTime, setLocalTime] = useState('')
+  const [hudStatus, setHudStatus] = useState<HudStatus>('idle')
+  const [logs, setLogs] = useState<string[]>([])
+  const [distance, setDistance] = useState<number | null>(null)
+  const [ping, setPing] = useState<number | null>(null)
+
+  // Live IST Clock
+  useEffect(() => {
+    const update = () => {
+      const options: Intl.DateTimeFormatOptions = {
+        timeZone: 'Asia/Kolkata',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false,
+      }
+      setLocalTime(new Intl.DateTimeFormat('en-US', options).format(new Date()))
+    }
+    update()
+    const timer = setInterval(update, 1000)
+    return () => clearInterval(timer)
+  }, [])
+
+  const handlePing = () => {
+    setHudStatus('pinging')
+    setLogs(['> INITIATING PING RESPONSE...'])
+
+    setTimeout(() => {
+      setLogs(prev => [...prev, '> ACQUIRING GPS HANDSHAKE...'])
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const { latitude, longitude } = position.coords
+            const dist = calculateHaversine(latitude, longitude, 11.0168, 76.9558)
+            const simulatedPing = Math.round(15 + dist * 0.05 + Math.random() * 15)
+
+            setLogs(prev => [
+              ...prev,
+              `> COORDS ACQUIRED: ${latitude.toFixed(3)}°N, ${longitude.toFixed(3)}°E`,
+              `> COMPUTING HAVERSINE INTERCEPT...`,
+              `> HANDSHAKE ESTABLISHED.`
+            ])
+
+            setTimeout(() => {
+              setDistance(dist)
+              setPing(simulatedPing)
+              setHudStatus('success')
+            }, 800)
+          },
+          (error) => {
+            let errorMsg = 'ACCESS DENIED'
+            if (error.code === error.TIMEOUT) errorMsg = 'GPS TIMEOUT'
+            if (error.code === error.POSITION_UNAVAILABLE) errorMsg = 'GPS POSITION UNAVAILABLE'
+
+            setLogs(prev => [
+              ...prev,
+              `> GPS FAILED: ${errorMsg}`,
+              `> RESOLVING VIA IP GEOLOCATION GATEWAY...`
+            ])
+            setHudStatus('resolving_ip')
+
+            // Fallback to IP lookup
+            fetch('https://ipapi.co/json/')
+              .then(res => res.json())
+              .then(data => {
+                if (data.latitude && data.longitude) {
+                  const dist = calculateHaversine(data.latitude, data.longitude, 11.0168, 76.9558)
+                  const simulatedPing = Math.round(30 + dist * 0.06 + Math.random() * 20)
+
+                  setLogs(prev => [
+                    ...prev,
+                    `> GATEWAY: ${data.city || 'UNKNOWN'}, ${data.country_code || 'IP'}`,
+                    `> ROUTE ACQUIRED VIA VPN/IP.`
+                  ])
+
+                  setTimeout(() => {
+                    setDistance(dist)
+                    setPing(simulatedPing)
+                    setHudStatus('success')
+                  }, 800)
+                } else {
+                  throw new Error('Invalid data')
+                }
+              })
+              .catch(() => {
+                // Timezone offset approximation fallback
+                setLogs(prev => [
+                  ...prev,
+                  `> IP GEOLOCATION FAILED`,
+                  `> USING REGION TIMEZONE DRIFT...`
+                ])
+
+                const tz = Intl.DateTimeFormat().resolvedOptions().timeZone
+                let fallbackDist = 1800
+                let fallbackPing = 120
+
+                if (tz.includes('America')) {
+                  fallbackDist = 13500
+                  fallbackPing = 240
+                } else if (tz.includes('Europe')) {
+                  fallbackDist = 7200
+                  fallbackPing = 160
+                } else if (tz.includes('Australia')) {
+                  fallbackDist = 9500
+                  fallbackPing = 180
+                } else if (tz.includes('Kolkata') || tz.includes('Asia/Kolkata')) {
+                  fallbackDist = 450
+                  fallbackPing = 35
+                }
+
+                setTimeout(() => {
+                  setLogs(prev => [
+                    ...prev,
+                    `> REGION MATCH: ${tz}`,
+                    `> ROUTE SECURED WITH STATIC PING.`
+                  ])
+                  setDistance(fallbackDist)
+                  setPing(fallbackPing)
+                  setHudStatus('success')
+                }, 800)
+              })
+          },
+          { timeout: 5000 }
+        )
+      } else {
+        setLogs(prev => [...prev, '> GPS HANDSHAKE BLOCKED // ROUTING VOID.'])
+        setHudStatus('failed')
+      }
+    }, 600)
+  }
+
   return (
     <section id="location" className="lx-section">
       <div className="lx-container">
@@ -84,17 +233,29 @@ export default function Location() {
               background: 'var(--surface)',
             }}
           >
-            {/* Header */}
-            <p style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: '8px',
-              letterSpacing: '0.35em',
-              textTransform: 'uppercase',
-              color: 'var(--gold)',
-              marginBottom: 28,
-            }}>
-              Current Base
-            </p>
+            {/* Header with Clock */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 28 }}>
+              <p style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '8px',
+                letterSpacing: '0.35em',
+                textTransform: 'uppercase',
+                color: 'var(--gold)',
+                margin: 0,
+              }}>
+                Current Base
+              </p>
+              {localTime && (
+                <span style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '9px',
+                  color: 'var(--gold)',
+                  letterSpacing: '0.08em',
+                }}>
+                  {localTime} IST
+                </span>
+              )}
+            </div>
 
             {FACTS.map(({ icon: Icon, label, value }, i) => (
               <div
@@ -146,7 +307,7 @@ export default function Location() {
           transition={{ duration: 0.6, delay: 0.3 }}
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
+            gridTemplateColumns: 'repeat(4, 1fr)',
             borderLeft: '1px solid var(--border)',
             borderRight: '1px solid var(--border)',
             borderBottom: '1px solid var(--border)',
@@ -177,6 +338,69 @@ export default function Location() {
               </span>
             </div>
           ))}
+
+          {/* Interactive HUD Card */}
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              minHeight: 88,
+              background: 'rgba(201, 169, 110, 0.012)',
+            }}
+          >
+            {hudStatus === 'idle' && (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 8, height: '100%', justifyContent: 'center' }}>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', letterSpacing: '0.12em', color: 'var(--muted)', textTransform: 'uppercase' }}>
+                  // Local Node Link
+                </span>
+                <button
+                  onClick={handlePing}
+                  className="btn-gold"
+                  style={{
+                    padding: '8px 12px',
+                    fontSize: '8px',
+                    width: '100%',
+                    justifyContent: 'center',
+                    letterSpacing: '0.15em',
+                  }}
+                >
+                  [ PING COIMBATORE ]
+                </button>
+              </div>
+            )}
+
+            {(hudStatus === 'pinging' || hudStatus === 'resolving_ip') && (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 2, height: '100%', justifyContent: 'center' }}>
+                <div style={{ maxHeight: 60, overflowY: 'hidden', display: 'flex', flexDirection: 'column', gap: 2 }}>
+                  {logs.slice(-3).map((log, li) => (
+                    <span key={li} style={{ fontFamily: 'var(--font-mono)', fontSize: '7.5px', color: 'var(--gold)', opacity: 0.9 }}>
+                      {log}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {hudStatus === 'success' && distance !== null && ping !== null && (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 4, height: '100%', justifyContent: 'center' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+                  <span style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', fontWeight: 300, color: 'var(--cream)' }}>
+                    {distance.toLocaleString()} km
+                  </span>
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', color: 'var(--gold)' }}>
+                    {ping}ms
+                  </span>
+                </div>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', letterSpacing: '0.22em', color: 'var(--gold)', textTransform: 'uppercase', lineHeight: 1 }}>
+                  Node Linked
+                </span>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '7px', color: 'var(--muted)', lineHeight: 1 }}>
+                  Latency: stable // Gateway: active
+                </span>
+              </div>
+            )}
+          </div>
         </motion.div>
       </div>
 

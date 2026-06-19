@@ -6,6 +6,7 @@ interface AudioCtx {
   toggleAudio: () => void
   playHover: () => void
   playClick: () => void
+  analyser: AnalyserNode | null
 }
 
 const AudioContext = createContext<AudioCtx>({
@@ -13,6 +14,7 @@ const AudioContext = createContext<AudioCtx>({
   toggleAudio: () => {},
   playHover: () => {},
   playClick: () => {},
+  analyser: null,
 })
 
 // Cross-browser AudioContext resolution without using 'any'
@@ -21,10 +23,11 @@ const AudioContextClass = typeof window !== 'undefined'
   : null
 
 // Synthesize short UI tick for hover
-const playHoverSound = () => {
+const playHoverSound = (audioCtx?: AudioContext | null, dest?: AudioNode | null) => {
   if (!AudioContextClass) return
   try {
-    const ctx = new AudioContextClass()
+    const ctx = audioCtx || new AudioContextClass()
+    const targetDest = dest || ctx.destination
     const osc = ctx.createOscillator()
     const gain = ctx.createGain()
 
@@ -37,7 +40,7 @@ const playHoverSound = () => {
     gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.015)
 
     osc.connect(gain)
-    gain.connect(ctx.destination)
+    gain.connect(targetDest)
     osc.start()
     osc.stop(ctx.currentTime + 0.02)
   } catch {
@@ -46,10 +49,11 @@ const playHoverSound = () => {
 }
 
 // Synthesize short UI blip for click confirmation
-const playClickSound = () => {
+const playClickSound = (audioCtx?: AudioContext | null, dest?: AudioNode | null) => {
   if (!AudioContextClass) return
   try {
-    const ctx = new AudioContextClass()
+    const ctx = audioCtx || new AudioContextClass()
+    const targetDest = dest || ctx.destination
     const osc = ctx.createOscillator()
     const gain = ctx.createGain()
 
@@ -61,7 +65,7 @@ const playClickSound = () => {
     gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.04)
 
     osc.connect(gain)
-    gain.connect(ctx.destination)
+    gain.connect(targetDest)
     osc.start()
     osc.stop(ctx.currentTime + 0.05)
   } catch {
@@ -74,6 +78,7 @@ export function AudioProvider({ children }: { children: ReactNode }) {
     return localStorage.getItem('audioOn') === 'true'
   })
 
+  const [analyser, setAnalyser] = useState<AnalyserNode | null>(null)
   const synthCtxRef = useRef<AudioContext | null>(null)
   const synthOscsRef = useRef<OscillatorNode[]>([])
 
@@ -83,6 +88,11 @@ export function AudioProvider({ children }: { children: ReactNode }) {
       if (synthCtxRef.current) return
       const audioCtx = new AudioContextClass()
       synthCtxRef.current = audioCtx
+
+      // Setup analyser
+      const analyserNode = audioCtx.createAnalyser()
+      analyserNode.fftSize = 256
+      setAnalyser(analyserNode)
 
       // Chord frequencies for warm analog synth pad: C2, G2, C3, E3, G3
       const freqs = [65.41, 98.00, 130.81, 164.81, 196.00]
@@ -119,7 +129,9 @@ export function AudioProvider({ children }: { children: ReactNode }) {
       })
 
       filter.connect(masterGain)
-      masterGain.connect(audioCtx.destination)
+      // Route masterGain -> analyserNode -> destination
+      masterGain.connect(analyserNode)
+      analyserNode.connect(audioCtx.destination)
     } catch {
       // ignore blocked audio
     }
@@ -142,6 +154,10 @@ export function AudioProvider({ children }: { children: ReactNode }) {
       }
       synthCtxRef.current = null
     }
+    // Defer state update to avoid synchronous cascading renders warning inside effects
+    setTimeout(() => {
+      setAnalyser(null)
+    }, 0)
   }
 
   // Manage ambient synth lifecycle
@@ -173,7 +189,8 @@ export function AudioProvider({ children }: { children: ReactNode }) {
     const handleMouseOver = (e: MouseEvent) => {
       const target = (e.target as HTMLElement).closest('a, button, [role="button"]') as HTMLElement
       if (target && target !== lastTarget) {
-        playHoverSound()
+        // Connect hover sound to active analyser if available
+        playHoverSound(synthCtxRef.current, analyser)
         lastTarget = target
       } else if (!target) {
         lastTarget = null
@@ -183,7 +200,8 @@ export function AudioProvider({ children }: { children: ReactNode }) {
     const handleClick = (e: MouseEvent) => {
       const target = (e.target as HTMLElement).closest('a, button, [role="button"]')
       if (target) {
-        playClickSound()
+        // Connect click sound to active analyser if available
+        playClickSound(synthCtxRef.current, analyser)
       }
     }
 
@@ -193,7 +211,7 @@ export function AudioProvider({ children }: { children: ReactNode }) {
       document.removeEventListener('mouseover', handleMouseOver)
       document.removeEventListener('click', handleClick)
     }
-  }, [audioOn])
+  }, [audioOn, analyser])
 
   const toggleAudio = () => {
     setAudioOn((prev) => {
@@ -204,15 +222,15 @@ export function AudioProvider({ children }: { children: ReactNode }) {
   }
 
   const playHover = () => {
-    if (audioOn) playHoverSound()
+    if (audioOn) playHoverSound(synthCtxRef.current, analyser)
   }
 
   const playClick = () => {
-    if (audioOn) playClickSound()
+    if (audioOn) playClickSound(synthCtxRef.current, analyser)
   }
 
   return (
-    <AudioContext.Provider value={{ audioOn, toggleAudio, playHover, playClick }}>
+    <AudioContext.Provider value={{ audioOn, toggleAudio, playHover, playClick, analyser }}>
       {children}
     </AudioContext.Provider>
   )
