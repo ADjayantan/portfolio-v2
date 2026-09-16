@@ -7,6 +7,7 @@ import ProgressBar from './components/layout/ProgressBar'
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
 import Preloader from './components/layout/Preloader'
+import SpaceBackground from './components/layout/SpaceBackground'
 import Marquee from './components/layout/Marquee'
 import BarDivider from './components/layout/BarDivider'
 import Hero from './components/sections/Hero'
@@ -23,6 +24,7 @@ function PortfolioApp() {
 
   return (
     <div style={{ background: 'var(--bg)', color: 'var(--text)', minHeight: '100vh' }}>
+      <SpaceBackground />          {/* fixed, z-index 0 */}
       {/* Global UI */}
       <Cursor />
       <ProgressBar />
@@ -30,6 +32,8 @@ function PortfolioApp() {
 
       {/* Main content fades in after preloader */}
       <div style={{
+        position: 'relative',
+        zIndex: 1,
         opacity: loaded ? 1 : 0,
         transition: 'opacity 0.6s ease',
         pointerEvents: loaded ? 'auto' : 'none',
