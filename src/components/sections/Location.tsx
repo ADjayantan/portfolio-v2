@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react'
+import { profile } from '../../data/profile'
 import { motion } from 'framer-motion'
 import { MapPin, Building2, Wifi, Navigation } from 'lucide-react'
 import PixelReveal from '../layout/PixelReveal'
 
 const FACTS = [
   { icon: MapPin,    label: 'City',         value: 'Coimbatore, Tamil Nadu, India' },
-  { icon: Building2, label: 'College',      value: 'VSB College of Engineering & Technical Campus' },
+  { icon: Building2, label: 'College',      value: `${profile.college} · ${profile.year} CSE` },
   { icon: Wifi,      label: 'Availability', value: 'Remote · Hybrid · Relocation (PAN India)' },
   { icon: Navigation,label: 'Nearest Hub',  value: 'Chennai — 6 hrs · Bangalore — 5 hrs' },
 ]

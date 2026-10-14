@@ -6,6 +6,8 @@ export interface Profile {
   location: string;
   college: string;
   degree: string;
+  year: string;
+  batch: string;
   company: string;
   links: {
     github: string;

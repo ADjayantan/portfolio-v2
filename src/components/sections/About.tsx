@@ -4,7 +4,8 @@ import TextReveal, { ImageWipe } from '../layout/TextReveal'
 
 const DETAILS = [
   { label: 'Degree',   value: profile.degree },
-  { label: 'College',  value: profile.college },
+  { label: 'Year',     value: `${profile.year} · Batch ${profile.batch}` },
+  { label: 'College',  value: `${profile.college}, Coimbatore` },
   { label: 'Location', value: profile.location },
   { label: 'Company',  value: `${profile.company} — Intern` },
   { label: 'Focus',    value: 'Web Dev + DSA + Java' },

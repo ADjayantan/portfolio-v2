@@ -4,10 +4,12 @@ export const profile: Profile = {
   name: 'AD Jayantan',
   title: 'Frontend Developer | Problem Solver',
   tagline: 'I design structured frontend systems and improve problem-solving through consistent DSA practice.',
-  bio: 'B.E. Computer Science student at VSB College of Engineering and Technical Campus, Coimbatore. Building real-world web systems with React and TypeScript while consistently practicing data structures and algorithms.',
+  bio: 'Third-year B.E. Computer Science and Engineering student at VSB College of Engineering and Technical Campus, Coimbatore. Building real-world web systems with React and TypeScript while consistently practicing data structures and algorithms.',
   location: 'Coimbatore, Tamil Nadu, India',
   college: 'VSB College of Engineering and Technical Campus',
   degree: 'B.E. Computer Science and Engineering',
+  year: '3rd Year',
+  batch: '2024 – 2028',
   company: 'Havonz Technologies',
   links: {
     github: 'https://github.com/ADjayantan',
