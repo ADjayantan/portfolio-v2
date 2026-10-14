@@ -31,7 +31,7 @@ export default function Contact() {
           initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
           viewport={{ once: true }} transition={{ duration: 0.6 }}
         >
-          06 — Contact
+          07 — Contact
         </motion.p>
 
         {/* Large closing statement */}
@@ -68,7 +68,7 @@ export default function Contact() {
             marginBottom: 64,
           }}
         >
-          Open to frontend roles, internships, and interesting side projects.
+          Open to ML & backend internships, SDE roles, and interesting side projects.
         </motion.p>
 
         {/* Link cards */}

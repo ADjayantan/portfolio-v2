@@ -14,11 +14,11 @@ interface StatItem {
 
 const STATS: StatItem[] = [
   { value: leetcodeStats.total,         label: 'Problems Solved',  sub: `Easy ${leetcodeStats.easy} · Med ${leetcodeStats.medium} · Hard ${leetcodeStats.hard}` },
-  { value: leetcodeStats.contestRating, label: 'Contest Rating',   sub: 'LeetCode rating' },
-  { value: leetcodeStats.maxStreak,     label: 'Active Streak',    sub: `Max streak: ${leetcodeStats.maxStreak} days` },
-  { value: githubStats.repos,           label: 'Public Repos',     sub: 'Open-source codebases' },
-  { value: githubStats.stars,           label: 'Total Stars',      sub: 'Received stargazers' },
-  { value: githubStats.followers,       label: 'GitHub Followers', sub: 'Social connections' },
+  { value: leetcodeStats.contestRating, label: 'Contest Rating',   sub: `Top ${leetcodeStats.topPercentage}% · ${leetcodeStats.contestsAttended} contests` },
+  { value: leetcodeStats.maxStreak,     label: 'Max Streak (days)', sub: `${leetcodeStats.activeDays} active days in the past year` },
+  { value: leetcodeStats.javaSolved,    label: 'Solved in Java',   sub: 'Primary DSA language' },
+  { value: leetcodeStats.badges,        label: 'LeetCode Badges',  sub: leetcodeStats.badgeNames.join(' · ') || 'Annual badges' },
+  { value: githubStats.repos,           label: 'Public Repos',     sub: 'Open source on GitHub' },
 ]
 
 function useCountUp(target: number, duration = 1600, start = false) {
@@ -134,7 +134,7 @@ export default function DSA() {
           initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
           viewport={{ once: true }} transition={{ duration: 0.6 }}
         >
-          03 — DSA Practice
+          04 — DSA Practice
         </motion.p>
         <PixelReveal text="The Numbers" className="lx-heading" />
 

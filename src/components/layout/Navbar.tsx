@@ -6,6 +6,7 @@ import Magnetic from './Magnetic'
 
 const NAV_LINKS = [
   { label: 'About',    href: '#about' },
+  { label: 'Experience', href: '#experience' },
   { label: 'Projects', href: '#projects' },
   { label: 'DSA',      href: '#dsa' },
   { label: 'Skills',   href: '#skills' },
@@ -13,7 +14,7 @@ const NAV_LINKS = [
   { label: 'Contact',  href: '#contact' },
 ]
 
-const SECTION_IDS = ['about', 'projects', 'dsa', 'skills', 'location', 'contact']
+const SECTION_IDS = ['about', 'experience', 'projects', 'dsa', 'skills', 'location', 'contact']
 
 export default function Navbar() {
   const { theme, toggle } = useTheme()

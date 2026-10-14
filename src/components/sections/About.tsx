@@ -7,9 +7,9 @@ const DETAILS = [
   { label: 'Year',     value: `${profile.year} · Batch ${profile.batch}` },
   { label: 'College',  value: `${profile.college}, Coimbatore` },
   { label: 'Location', value: profile.location },
-  { label: 'Company',  value: `${profile.company} — Intern` },
-  { label: 'Focus',    value: 'Web Dev + DSA + Java' },
-  { label: 'Status',   value: 'Open to opportunities' },
+  { label: 'Role',     value: `${profile.role} · ${profile.company}` },
+  { label: 'Focus',    value: 'Machine Learning · Backend · DSA in Java' },
+  { label: 'Status',   value: 'Open to internships — Remote · Hybrid · On-site' },
 ]
 
 export default function About() {
@@ -40,7 +40,7 @@ export default function About() {
           paddingLeft: 32,
         }}>
           <TextReveal
-            text="I design structured frontend systems and sharpen problem-solving through consistent, disciplined DSA practice."
+            text={profile.tagline}
             threshold={0.1}
           />
         </blockquote>

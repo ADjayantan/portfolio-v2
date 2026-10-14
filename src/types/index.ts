@@ -1,6 +1,7 @@
 export interface Profile {
   name: string;
   title: string;
+  stack: string;
   tagline: string;
   bio: string;
   location: string;
@@ -9,12 +10,29 @@ export interface Profile {
   year: string;
   batch: string;
   company: string;
+  role: string;
   links: {
     github: string;
     linkedin: string;
     leetcode: string;
+    huggingface: string;
     resume: string;
   };
+}
+
+export interface ExperienceItem {
+  role: string;
+  org: string;
+  period: string;
+  place: string;
+  current?: boolean;
+  points?: string[];
+}
+
+export interface Recognition {
+  title: string;
+  detail: string;
+  date: string;
 }
 
 export interface Project {
@@ -50,9 +68,13 @@ export interface LeetCodeStats {
   hard: number;
   contestRating: number;
   globalRanking: string | number;
+  contestsAttended: number;
+  topPercentage: number;
   activeDays: number;
   maxStreak: number;
   badges: number;
+  badgeNames: string[];
+  javaSolved: number;
 }
 
 export interface GitHubStats {

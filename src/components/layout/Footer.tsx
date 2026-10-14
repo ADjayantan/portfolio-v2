@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { profile } from '../../data/profile'
 
 // Pixel art "< / >" code icon — 11 cols x 7 rows, 0=off 1=on
 const CODE_ART = [
@@ -125,7 +126,7 @@ export default function Footer() {
             marginBottom: 48,
           }}
         >
-          Frontend Developer · Coimbatore, India
+          {profile.title} · Coimbatore, India
         </motion.p>
 
         {/* Bottom row */}

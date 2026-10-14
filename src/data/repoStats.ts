@@ -1,13 +1,5 @@
 export const repoStats: Record<string, { stars: number; forks: number }> = {
-  "zentry": {
-    "stars": 0,
-    "forks": 0
-  },
-  "ai-builder": {
-    "stars": 0,
-    "forks": 0
-  },
-  "ai-voice": {
+  "epiadr-net": {
     "stars": 0,
     "forks": 0
   },
@@ -15,15 +7,31 @@ export const repoStats: Record<string, { stars: number; forks: number }> = {
     "stars": 0,
     "forks": 0
   },
-  "medplus": {
+  "genezenz": {
     "stars": 0,
     "forks": 0
   },
-  "vaithiyam": {
+  "spam-sms": {
+    "stars": 0,
+    "forks": 0
+  },
+  "leetflow": {
+    "stars": 0,
+    "forks": 0
+  },
+  "fraud-detection": {
+    "stars": 0,
+    "forks": 0
+  },
+  "smart-asset": {
     "stars": 0,
     "forks": 0
   },
   "devtrack": {
+    "stars": 0,
+    "forks": 0
+  },
+  "vaithiyam": {
     "stars": 0,
     "forks": 0
   }

@@ -2,30 +2,28 @@ import type { LeetCodeStats, GitHubStats } from '../types'
 
 // Automated daily update from LeetCode GraphQL API
 export const leetcodeStats: LeetCodeStats = {
-  "total": 166,
-  "easy": 140,
-  "medium": 25,
-  "hard": 1,
+  "total": 239,
+  "easy": 166,
+  "medium": 60,
+  "hard": 13,
   "contestRating": 1458,
-  "globalRanking": 514899,
-  "activeDays": 127,
+  "globalRanking": 523240,
+  "contestsAttended": 5,
+  "topPercentage": 59.4,
+  "activeDays": 184,
   "maxStreak": 106,
-  "badges": 2
+  "badges": 2,
+  "badgeNames": [
+    "100 Days Badge 2026",
+    "50 Days Badge 2026"
+  ],
+  "javaSolved": 226
 }
 
 // Automated daily update from GitHub REST API
 export const githubStats: GitHubStats = {
-  "repos": 19,
-  "followers": 2,
+  "repos": 29,
+  "followers": 3,
   "stars": 1,
   "forks": 0
 }
-
-// Repos to feature
-export const featuredRepos = [
-  'AD-Jayantan-',
-  'Jayantan-',
-  'My-portflio',
-  'signbridge-',
-  'studio',
-]

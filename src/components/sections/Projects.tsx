@@ -22,7 +22,7 @@ export default function Projects() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          02 — Projects
+          03 — Projects
         </motion.p>
         <PixelReveal text="What I've Built" className="lx-heading" />
 

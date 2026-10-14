@@ -12,11 +12,13 @@ import Marquee from './components/layout/Marquee'
 import BarDivider from './components/layout/BarDivider'
 import Hero from './components/sections/Hero'
 import About from './components/sections/About'
+import Experience from './components/sections/Experience'
 import Projects from './components/sections/Projects'
 import DSA from './components/sections/DSA'
 import Skills from './components/sections/Skills'
 import Location from './components/sections/Location'
 import Contact from './components/sections/Contact'
+import { profile } from './data/profile'
 
 function PortfolioApp() {
   const [loaded, setLoaded] = useState(false)
@@ -46,7 +48,7 @@ function PortfolioApp() {
 
           {/* ── Marquee strip ────────────────── */}
           <Marquee
-            text="Frontend Developer"
+            text={profile.title}
             separator="·"
             speed={55}
             direction="left"
@@ -58,6 +60,9 @@ function PortfolioApp() {
 
           {/* ── About ────────────────────────── */}
           <About />
+
+          {/* ── Experience ───────────────────── */}
+          <Experience />
 
           {/* ── Bar dissolve divider ─────────── */}
           <BarDivider barCount={40} height={160} color="var(--gold)" />

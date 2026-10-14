@@ -7,7 +7,7 @@ import PixelReveal from '../layout/PixelReveal'
 const FACTS = [
   { icon: MapPin,    label: 'City',         value: 'Coimbatore, Tamil Nadu, India' },
   { icon: Building2, label: 'College',      value: `${profile.college} · ${profile.year} CSE` },
-  { icon: Wifi,      label: 'Availability', value: 'Remote · Hybrid · Relocation (PAN India)' },
+  { icon: Wifi,      label: 'Availability', value: 'Remote · Hybrid · On-site · Relocation (PAN India)' },
   { icon: Navigation,label: 'Nearest Hub',  value: 'Chennai — 6 hrs · Bangalore — 5 hrs' },
 ]
 
@@ -168,7 +168,7 @@ export default function Location() {
           initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
           viewport={{ once: true }} transition={{ duration: 0.6 }}
         >
-          05 — Where I Am
+          06 — Where I Am
         </motion.p>
         <PixelReveal text="Coimbatore" className="lx-heading" />
 

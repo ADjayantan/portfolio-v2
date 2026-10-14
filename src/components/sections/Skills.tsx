@@ -67,7 +67,7 @@ export default function Skills() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          04 — Stack
+          05 — Stack
         </motion.p>
         <PixelReveal text="Tech & Tools" className="lx-heading" />
 
@@ -164,7 +164,9 @@ export default function Skills() {
           .skills-grid > div:nth-child(2n) {
             border-right: none;
           }
-          .skills-grid > div:nth-child(n+3) {
+          /* last row (works for any category count) */
+          .skills-grid > div:nth-child(odd):nth-last-child(-n+2),
+          .skills-grid > div:nth-child(odd):nth-last-child(-n+2) ~ div {
             border-bottom: none;
           }
         }

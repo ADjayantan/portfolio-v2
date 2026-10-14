@@ -2,10 +2,16 @@ import { useEffect, useState, useRef, useCallback } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { ArrowDown, Github, Linkedin, Code2, Download } from 'lucide-react'
 import { profile } from '../../data/profile'
+import { leetcodeStats } from '../../data/stats'
 import HeroParticles from './HeroParticles'
 
 // ─── constants ────────────────────────────────────────────────────────────────
-const TAGLINES = ['Frontend Developer', 'Problem Solver', 'DSA Practitioner', 'React Craftsman']
+const TAGLINES = [
+  profile.title,
+  profile.stack,
+  'SWE Intern @ Havonz',
+  `${leetcodeStats.total} LeetCode problems solved`,
+]
 const SOCIALS  = [
   { icon: Github,   href: profile.links.github,  label: 'GitHub'   },
   { icon: Linkedin, href: profile.links.linkedin, label: 'LinkedIn' },
@@ -456,7 +462,7 @@ export default function Hero() {
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 2,
           }}
         >
-          <span>{displayed}</span>
+          <span style={{ whiteSpace: 'nowrap' }}>{displayed}</span>
           <span style={{ animation: 'blink 1s step-end infinite', color: 'var(--gold)' }}>|</span>
         </motion.div>
 
