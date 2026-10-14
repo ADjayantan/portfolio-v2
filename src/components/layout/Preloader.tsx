@@ -1,13 +1,15 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { shouldSkipIntro } from '../../lib/intro'
 
 interface PreloaderProps {
   onComplete: () => void
 }
 
 export default function Preloader({ onComplete }: PreloaderProps) {
+  const [skip]                = useState(shouldSkipIntro)
   const [count,   setCount]   = useState(0)
-  const [visible, setVisible] = useState(true)
+  const [visible, setVisible] = useState(!skip)
 
   // Use ref so the effect never needs onComplete in its dep array
   const onCompleteRef = useRef(onComplete)
@@ -16,8 +18,12 @@ export default function Preloader({ onComplete }: PreloaderProps) {
   })
 
   useEffect(() => {
+    if (skip) {
+      onCompleteRef.current()
+      return
+    }
     const start    = performance.now()
-    const duration = 2000
+    const duration = 1000
     let rafId: number
 
     const raf = (now: number) => {
@@ -33,13 +39,13 @@ export default function Preloader({ onComplete }: PreloaderProps) {
         setTimeout(() => {
           setVisible(false)
           onCompleteRef.current()
-        }, 400)
+        }, 220)
       }
     }
 
     rafId = requestAnimationFrame(raf)
     return () => cancelAnimationFrame(rafId)
-  }, []) // ✅ Empty deps — runs once only
+  }, [skip]) // runs once — `skip` never changes after mount
 
   return (
     <AnimatePresence>
@@ -59,7 +65,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
             initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.15 }}
             style={{
-              fontFamily: 'var(--font-mono)', fontSize: '8px',
+              fontFamily: 'var(--font-mono)', fontSize: 'var(--fs-2xs)',
               letterSpacing: '0.45em', textTransform: 'uppercase',
               color: 'var(--muted)', marginBottom: 48,
             }}

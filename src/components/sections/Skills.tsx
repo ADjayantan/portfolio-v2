@@ -1,24 +1,32 @@
 import { motion } from 'framer-motion'
-import { skills, levelColors } from '../../data/skills'
+import { skills } from '../../data/skills'
 import PixelReveal from '../layout/PixelReveal'
 
-interface SkillDotProps {
-  color: string
-  glow?: boolean
-}
+const LEVEL_FILL = { core: 3, proficient: 2, familiar: 1 } as const
+const LEVEL_LABEL = { core: 'Core', proficient: 'Proficient', familiar: 'Familiar' } as const
 
-function SkillDot({ color, glow = false }: SkillDotProps) {
+// Three gold bars instead of the old cyan/purple/grey dots: on-palette, and the
+// level reads at a glance without a colour legend.
+function SkillMeter({ level }: { level: keyof typeof LEVEL_FILL }) {
+  const filled = LEVEL_FILL[level]
   return (
     <span
-      style={{
-        width: 6,
-        height: 6,
-        borderRadius: '50%',
-        background: color,
-        flexShrink: 0,
-        boxShadow: glow ? `0 0 8px ${color}40` : undefined,
-      }}
-    />
+      role="img"
+      aria-label={LEVEL_LABEL[level]}
+      title={LEVEL_LABEL[level]}
+      style={{ display: 'inline-flex', gap: 3, flexShrink: 0 }}
+    >
+      {[0, 1, 2].map((i) => (
+        <span
+          key={i}
+          style={{
+            width: 14,
+            height: 3,
+            background: i < filled ? 'var(--gold)' : 'var(--border-light)',
+          }}
+        />
+      ))}
+    </span>
   )
 }
 
@@ -29,7 +37,6 @@ interface SkillRowProps {
 }
 
 function SkillRow({ name, level, showBorder }: SkillRowProps) {
-  const color = levelColors[level] ?? 'var(--muted)'
   return (
     <div
       style={{
@@ -51,7 +58,7 @@ function SkillRow({ name, level, showBorder }: SkillRowProps) {
       >
         {name}
       </span>
-      <SkillDot color={color} glow />
+      <SkillMeter level={level} />
     </div>
   )
 }
@@ -92,7 +99,7 @@ export default function Skills() {
               <p
                 style={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '8px',
+                  fontSize: 'var(--fs-2xs)',
                   letterSpacing: '0.35em',
                   textTransform: 'uppercase',
                   color: 'var(--gold)',
@@ -131,23 +138,19 @@ export default function Skills() {
             flexWrap: 'wrap',
           }}
         >
-          {[
-            { level: 'core', label: 'Core', color: levelColors.core },
-            { level: 'proficient', label: 'Proficient', color: levelColors.proficient },
-            { level: 'familiar', label: 'Familiar', color: levelColors.familiar },
-          ].map(({ label, color }) => (
-            <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <SkillDot color={color} />
+          {(['core', 'proficient', 'familiar'] as const).map((level) => (
+            <div key={level} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              <SkillMeter level={level} />
               <span
                 style={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '8px',
+                  fontSize: 'var(--fs-2xs)',
                   letterSpacing: '0.25em',
                   textTransform: 'uppercase',
                   color: 'var(--muted)',
                 }}
               >
-                {label}
+                {LEVEL_LABEL[level]}
               </span>
             </div>
           ))}

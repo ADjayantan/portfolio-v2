@@ -13,6 +13,8 @@ export const projects: Project[] = [
       'A research platform that conditions a 12-layer Graph Transformer over each molecular graph on 1024-dim GTEx organ transcriptomic profiles to predict organ-specific adverse drug reactions. Evaluated on a 5-fold Bemis–Murcko scaffold split with zero structural leakage (Macro AUROC 0.742 ± 0.031), with Monte Carlo dropout for uncertainty and GAT attention maps that highlight the substructures behind a prediction. Served as a FastAPI REST service, a Streamlit dashboard and a live Gradio app on Hugging Face Spaces, backed by a pytest suite.',
     contributions:
       'Tissue-conditioned model design, scaffold-split evaluation, FastAPI / Streamlit / Gradio interfaces and the Hugging Face deployment.',
+    category: 'ml',
+    highlights: ['AUROC 0.742', 'Scaffold split', 'Live on HF Spaces'],
     tech: ['PyTorch', 'RDKit', 'FastAPI', 'Streamlit', 'Gradio', 'pytest'],
     links: {
       github: 'https://github.com/ADjayantan/EpiADR-Net',
@@ -30,6 +32,8 @@ export const projects: Project[] = [
       'Sign mode tracks 21 landmarks per hand on-device with MediaPipe (WebAssembly), turns them into rotation- and distance-invariant features, and recognises built-in gestures plus user-taught signs with a k-NN classifier (per-sign rejection thresholds, 0.7 s smoothing) before Gemini turns the words into a sentence and a reply. Voice mode streams answers into speech sentence by sentence. Measured on HaGRID photos of unseen people: 91% on built-in gestures and 95% on taught signs. Installable PWA in six languages including Tamil, with 52 unit tests and zero axe-core accessibility violations.',
     contributions:
       'Landmark feature extraction, k-NN classifier and smoother, the streaming voice loop, and a server-side Gemini proxy that keeps the API key off the client.',
+    category: 'ml',
+    highlights: ['95% on taught signs', '6 languages', '52 tests'],
     tech: ['React 19', 'MediaPipe', 'k-NN', 'Gemini API', 'Web Speech API', 'PWA'],
     links: {
       github: 'https://github.com/ADjayantan/signbridge-',
@@ -46,6 +50,8 @@ export const projects: Project[] = [
       'A server-rendered rebuild of a real pharmacy store: catalogue, cart, checkout, prescription upload, accounts and an admin panel, with per-page metadata, JSON-LD, a database-generated sitemap and local-area landing pages. A Meta lead-ads webhook (HMAC-SHA256 signature check, async processing, dedupe) feeds one admin inbox alongside website and WhatsApp leads. Recommendations blend TF-IDF cosine similarity with co-purchase signals under pharmacy safety rules that keep prescription drugs out of cross-sells. Prices come from the database, stock updates are transactional, and uploads are validated by magic bytes.',
     contributions:
       'v2 rebuild end to end — Prisma schema, API routes and server actions, the webhook, the recommendation engine and security hardening — after earlier Node/Express/MongoDB and PHP/MySQL versions.',
+    category: 'backend',
+    highlights: ['HMAC-verified webhook', 'TF-IDF recommendations', 'SSR + JSON-LD'],
     tech: ['Next.js 15', 'TypeScript', 'Prisma', 'PostgreSQL', 'Tailwind CSS'],
     links: {
       github: 'https://github.com/ADjayantan/Genezene-pharmacy',
@@ -62,6 +68,8 @@ export const projects: Project[] = [
       'TF-IDF over unigrams and bigrams, with URLs, emails, phone numbers and amounts replaced by placeholder tokens instead of deleted, and stopwords deliberately kept because words like "free", "call" and "now" carry the spam signal. Multinomial Naive Bayes, Logistic Regression and Linear SVC were compared on 5-fold cross-validated F1; Linear SVC won with 98.3% accuracy, 94.5% precision and 91.6% recall. Shipped as a Streamlit app with bulk CSV scanning and an adjustable decision threshold, covered by 61 pytest tests.',
     contributions:
       'Task 4 of the CodSoft Machine Learning internship: preprocessing, model selection, the Streamlit app and the test suite.',
+    category: 'ml',
+    highlights: ['98.3% accuracy', '93.0% F1', '61 tests'],
     tech: ['Python', 'scikit-learn', 'TF-IDF', 'Streamlit', 'pytest'],
     links: {
       github: 'https://github.com/ADjayantan/codsoft_tasks',
@@ -78,6 +86,8 @@ export const projects: Project[] = [
       'A tray app that opens LeetCode at scheduled times and catches up on missed slots after the PC was off or asleep, without ever opening the same slot twice. It syncs accepted submissions over LeetCode\'s public GraphQL API to tick tasks automatically, and adds a streak heatmap, a 3/7/21-day revision queue, contest reminders and roadmap trees from offline templates or any LLM provider, with API keys encrypted through Windows DPAPI. Seven pinnable desktop widgets, 89 unit tests and an NSIS installer.',
     contributions:
       'Scheduler and catch-up logic, LeetCode sync with auto-tick, and the pinnable widget window system.',
+    category: 'backend',
+    highlights: ['89 tests', '7 desktop widgets', 'Windows installer'],
     tech: ['Electron', 'React 19', 'TypeScript', 'Tailwind CSS', 'Vitest'],
     links: {
       github: 'https://github.com/ADjayantan/leetflow',
@@ -94,6 +104,8 @@ export const projects: Project[] = [
       'SMOTE oversamples the minority class during training only, and Logistic Regression and Random Forest are compared on precision, recall and F1 rather than accuracy — Random Forest won. The best model is serialised with a confusion-matrix report, and a Streamlit dashboard scores transactions in real time with confidence values.',
     contributions:
       'Task 5 of the CodSoft Machine Learning internship: preprocessing, resampling, model comparison and the dashboard.',
+    category: 'ml',
+    highlights: ['SMOTE resampling', 'RF vs LR', 'Streamlit app'],
     tech: ['Python', 'scikit-learn', 'imbalanced-learn', 'Pandas', 'Streamlit'],
     links: {
       github: 'https://github.com/ADjayantan/CODESOFT_TASK5',
@@ -110,6 +122,8 @@ export const projects: Project[] = [
       'An executive overview with condition totals, critical systems, department health and a 421-task maintenance queue, plus a searchable inventory with CSV export. Every system gets a real QR code: visitors scan it to report an issue without logging in, while staff land on the full admin record. The React frontend and Express API share TypeScript models in a monorepo, with a service worker and cached records for low-connectivity use.',
     contributions:
       'Dashboard, inventory, QR tag manager and public scan flow, plus the Express API contract for the database phase.',
+    category: 'backend',
+    highlights: ['1,500 systems', 'QR scan flow', 'Live demo'],
     tech: ['React', 'TypeScript', 'Express', 'QR Codes', 'Service Worker'],
     links: {
       github: 'https://github.com/ADjayantan/Smart-asset',
@@ -127,6 +141,8 @@ export const projects: Project[] = [
       'A full-stack dashboard for daily learning logs, streaks and roadmap milestones. Express REST API with Mongoose models, JWT and bcrypt authentication, protected routes, express-validator input checks and centralised error handling; React + Vite client with a custom SVG weekly-activity chart. API on Render, client on Vercel.',
     contributions:
       'REST API and data models, the auth flow, streak calculation and the two-tier deployment.',
+    category: 'backend',
+    highlights: ['JWT + bcrypt', 'REST API', 'Render + Vercel'],
     tech: ['React', 'Node.js', 'Express', 'MongoDB', 'JWT'],
     links: {
       github: 'https://github.com/ADjayantan/devtrack-v3',
@@ -144,6 +160,8 @@ export const projects: Project[] = [
       'Bilingual Tamil and English e-commerce for Siddha, Ayurveda and natural medicine: catalogue, cart, prescription-aware checkout (Rx-gated items need an upload first), barcode scanner, order history and a full admin panel. A Supabase repository layer falls back to an in-memory store for local development, auth uses jose JWTs in HTTP-only cookies, Razorpay is scaffolded, and "Agasthiyan", a Groq-powered assistant, runs server-side with rate limiting.',
     contributions:
       'Storefront, admin panel, Supabase data layer and the server-side AI assistant.',
+    category: 'backend',
+    highlights: ['Tamil + English', 'Rx-gated checkout', 'Groq AI assistant'],
     tech: ['Next.js 16', 'React 19', 'TypeScript', 'Supabase', 'Zustand'],
     links: {
       github: 'https://github.com/ADjayantan/vaithiyam-web',

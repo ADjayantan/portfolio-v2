@@ -118,7 +118,7 @@ export default function Footer() {
           transition={{ delay: 0.2 }}
           style={{
             fontFamily: 'var(--font-mono)',
-            fontSize: '9px',
+            fontSize: 'var(--fs-xs)',
             letterSpacing: '0.35em',
             textTransform: 'uppercase',
             color: 'var(--gold)',
@@ -135,13 +135,13 @@ export default function Footer() {
           justifyContent: 'space-between', flexWrap: 'wrap', gap: 16,
           borderTop: '1px solid var(--border)', paddingTop: 24,
         }}>
-          <p style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', letterSpacing: '0.2em', color: 'var(--muted-2)' }}>
+          <p style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--fs-2xs)', letterSpacing: '0.2em', color: 'var(--muted)' }}>
             © {year} · All rights reserved
           </p>
-          <p style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', letterSpacing: '0.2em', color: 'var(--muted-2)' }}>
+          <p style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--fs-2xs)', letterSpacing: '0.2em', color: 'var(--muted)' }}>
             Built with React + Vite + Framer Motion
           </p>
-          <p style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', letterSpacing: '0.2em', color: 'var(--muted-2)' }}>
+          <p style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--fs-2xs)', letterSpacing: '0.2em', color: 'var(--muted)' }}>
             Inspired by Son Daven
           </p>
         </div>

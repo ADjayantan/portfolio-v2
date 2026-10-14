@@ -77,7 +77,7 @@ export default function Navbar() {
           display: 'flex', alignItems: 'center',
           gap: 16,
           transition: 'background 0.4s, border-color 0.4s',
-          background: scrolled ? 'rgba(7,8,12,0.88)' : 'transparent',
+          background: scrolled ? 'var(--header-bg)' : 'transparent',
           backdropFilter: scrolled ? 'blur(16px)' : 'none',
           borderBottom: scrolled ? '1px solid var(--border)' : '1px solid transparent',
         }}
@@ -109,8 +109,8 @@ export default function Navbar() {
                 onClick={() => scrollTo(l.href)}
                 style={{
                   background: 'none', border: 'none',
-                  fontFamily: 'var(--font-mono)', fontSize: '9px',
-                  letterSpacing: '0.25em', textTransform: 'uppercase',
+                  fontFamily: 'var(--font-mono)', fontSize: 'var(--fs-2xs)',
+                  letterSpacing: '0.22em', textTransform: 'uppercase',
                   color: isActive ? 'var(--gold)' : 'var(--muted)',
                   transition: 'color 0.2s', cursor: 'pointer',
                   position: 'relative', padding: '4px 0',
@@ -238,7 +238,7 @@ export default function Navbar() {
       {menuOpen && (
         <div style={{
           position: 'fixed', inset: 0, zIndex: 999,
-          background: 'rgba(7,8,12,0.97)',
+          background: 'var(--menu-bg)',
           display: 'flex', flexDirection: 'column',
           alignItems: 'center', justifyContent: 'center', gap: 40,
         }}>
@@ -263,7 +263,7 @@ export default function Navbar() {
         .lx-header {
           padding: 0 40px;
         }
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
           .lx-header {
             padding: 0 16px !important;
           }

@@ -1,9 +1,10 @@
 import { useEffect, useState, useRef, useCallback } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion'
 import { ArrowDown, Github, Linkedin, Code2, Download } from 'lucide-react'
 import { profile } from '../../data/profile'
 import { leetcodeStats } from '../../data/stats'
 import HeroParticles from './HeroParticles'
+import { shouldSkipIntro, markIntroSeen } from '../../lib/intro'
 
 // ─── constants ────────────────────────────────────────────────────────────────
 const TAGLINES = [
@@ -168,8 +169,10 @@ function PixelCanvas({ cfg, phase, onDone }: PixelCanvasProps) {
 
       cells.forEach(cell => {
         const raw    = Math.max(0, Math.min(1, (t - cell.delay) / ENTER_DUR))
-        // smooth-step enter
-        const enterA = raw * raw * (3 - 2 * raw)
+        // smooth-step enter; after the enter phase every cell stays lit. The clock
+        // resets on each phase change, so without this guard the whole name blanked
+        // out and re-scanned at the start of "hold".
+        const enterA = phase === 'enter' ? raw * raw * (3 - 2 * raw) : 1
 
         // ghost grid — always visible when not yet lit and not exiting
         if (!cell.on) {
@@ -273,18 +276,22 @@ type HeroPhase =
 // ── timing (ms) ──
 //   AD:   scan max delay ≈ 1*0.06 + 6*0.028 + 8*0.009 = 0.24 + ENTER_DUR 0.36 = 0.60s → hold at 750ms
 //   Full: scan max delay ≈ 10*0.06 + 6*0.028 + 8*0.009 = 0.84 + 0.36 = 1.2s → hold at 1400ms
+// Enter phases match the scan length exactly; holds are shorter than before,
+// so the name settles in ~4.2 s instead of ~5.7 s (CTAs no longer wait for it).
 const TIMING = {
-  adEnterToHold:   750,
-  adHoldDur:      1300,
-  fullEnterToHold: 1400,
-  fullHoldDur:    1050,
+  adEnterToHold:   600,
+  adHoldDur:       600,
+  fullEnterToHold: 1200,
+  fullHoldDur:     600,
 }
 
 const CFG_AD: Cfg   = { text: 'AD',          px: 20, gap: 4, cGap: 32, exit: 'implode', cssW: '380px' }
 const CFG_FULL: Cfg = { text: 'AD Jayantan', px:  7, gap: 2, cGap:  9, exit: 'scatter', cssW: '820px' }
 
 export default function Hero() {
-  const [heroPhase, setHeroPhase] = useState<HeroPhase>('ad-enter')
+  const [skipIntro] = useState(shouldSkipIntro)
+  const [heroPhase, setHeroPhase] = useState<HeroPhase>(skipIntro ? 'serif' : 'ad-enter')
+  const reduceMotion = useReducedMotion()
   const [tagIdx,    setTagIdx]    = useState(0)
   const [displayed, setDisplayed] = useState('')
   const [typing,    setTyping]    = useState(true)
@@ -310,6 +317,8 @@ export default function Hero() {
 
   const onADDone   = useCallback(() => setHeroPhase('full-enter'), [])
   const onFullDone = useCallback(() => setHeroPhase('serif'),      [])
+
+  useEffect(() => { if (heroPhase === 'serif') markIntroSeen() }, [heroPhase])
 
   const serifOn  = heroPhase === 'serif'
   const showAD   = heroPhase.startsWith('ad')
@@ -375,7 +384,7 @@ export default function Hero() {
       </motion.div>
 
       {/* ── interactive particles background ── */}
-      <HeroParticles />
+      {!reduceMotion && <HeroParticles />}
 
       {/* ── content ── */}
       <div style={{
@@ -383,17 +392,25 @@ export default function Hero() {
         padding: '0 20px', maxWidth: 920, width: '100%',
       }}>
 
-        {/* eyebrow */}
+        {/* status pill — the first thing a recruiter needs to know */}
         <motion.p
           initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1 }}
-          style={{
-            fontFamily: 'var(--font-mono)', fontSize: '9px',
-            letterSpacing: '0.5em', textTransform: 'uppercase',
-            color: 'var(--gold)', marginBottom: 44,
-          }}
+          style={{ marginBottom: 40 }}
         >
-          Portfolio · 2026 · Coimbatore
+          <span style={{
+            display: 'inline-flex', alignItems: 'center', gap: 12,
+            padding: '8px 18px', borderRadius: 999,
+            border: '1px solid var(--gold-border)', background: 'var(--gold-dim)',
+            fontFamily: 'var(--font-mono)', fontSize: 'var(--fs-2xs)',
+            letterSpacing: '0.28em', textTransform: 'uppercase', color: 'var(--gold)',
+          }}>
+            <span aria-hidden="true" style={{
+              width: 7, height: 7, borderRadius: '50%', background: 'var(--gold)',
+              animation: 'pulse-dot 2.2s ease-out infinite', flexShrink: 0,
+            }} />
+            Open to internships<span className="hero-pill-loc"> · Coimbatore, IN</span>
+          </span>
         </motion.p>
 
         {/* ── pixel / serif name block ── */}
@@ -468,35 +485,34 @@ export default function Hero() {
 
         {/* CTAs */}
         <motion.div
-          animate={{ opacity: serifOn ? 1 : 0, y: serifOn ? 0 : 10 }}
-          transition={{ duration: 0.7, delay: 0.22 }}
+          initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.3 }}
           style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap', marginBottom: 56 }}
         >
+          <a
+            className="btn-solid"
+            href={profile.links.resume}
+            download="Jayantan_AD_Resume.pdf"
+          >
+            <Download size={13} strokeWidth={2} /> Resume
+          </a>
           <button className="btn-gold" onClick={() => goTo('#projects')}>
             View Work
           </button>
-          <a
-            className="btn-ghost"
-            href={profile.links.resume}
-            download="Jayantan_AD_Resume.pdf"
-            style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}
-          >
-            <Download size={12} /> Resume
-          </a>
         </motion.div>
 
         {/* socials */}
         <motion.div
-          animate={{ opacity: serifOn ? 1 : 0 }}
-          transition={{ duration: 0.7, delay: 0.32 }}
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+          transition={{ duration: 0.7, delay: 0.4 }}
           style={{ display: 'flex', gap: 22, justifyContent: 'center', marginBottom: 76 }}
         >
           {SOCIALS.map(({ icon: Icon, href, label }) => (
             <a
               key={label} href={href} target="_blank" rel="noreferrer" aria-label={label}
-              style={{ color: 'var(--muted-2)', transition: 'color 0.22s', display: 'flex' }}
+              style={{ color: 'var(--muted)', transition: 'color 0.22s', display: 'flex' }}
               onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = 'var(--gold)')}
-              onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = 'var(--muted-2)')}
+              onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = 'var(--muted)')}
             >
               <Icon size={18} strokeWidth={1.4} />
             </a>
@@ -505,26 +521,28 @@ export default function Hero() {
 
         {/* scroll cue */}
         <motion.button
-          animate={{ opacity: serifOn ? 1 : 0 }}
-          transition={{ duration: 0.7, delay: 0.42 }}
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+          transition={{ duration: 0.7, delay: 0.5 }}
+          aria-label="Scroll to About" 
           onClick={() => goTo('#about')}
           style={{
             background: 'none', border: 'none', cursor: 'pointer',
-            color: 'var(--muted-2)', display: 'flex',
+            color: 'var(--muted)', display: 'flex',
             flexDirection: 'column', alignItems: 'center', gap: 7,
             margin: '0 auto', transition: 'color 0.22s',
             animation: 'float-y 3s ease-in-out infinite',
           }}
           onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = 'var(--gold)')}
-          onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = 'var(--muted-2)')}
+          onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = 'var(--muted)')}
         >
           <span style={{
-            fontSize: '8px', letterSpacing: '0.38em',
+            fontSize: 'var(--fs-2xs)', letterSpacing: '0.38em',
             textTransform: 'uppercase', fontFamily: 'var(--font-mono)',
           }}>scroll</span>
           <ArrowDown size={13} strokeWidth={1.4} />
         </motion.button>
       </div>
+      <style>{`@media (max-width: 480px) { .hero-pill-loc { display: none; } }`}</style>
     </section>
   )
 }

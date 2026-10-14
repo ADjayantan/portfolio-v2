@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
-import { useInView } from 'framer-motion'
+import { useInView, useReducedMotion } from 'framer-motion'
 
 interface PixelRevealProps {
   text: string
@@ -15,10 +15,12 @@ export default function PixelReveal({ text, className, style, duration = 750 }: 
   const ref = useRef<HTMLHeadingElement>(null)
   const isInView = useInView(ref, { once: true, amount: 0.35 })
   const hasAnimated = useRef(false)
+  const reduceMotion = useReducedMotion()
 
   useEffect(() => {
     if (!isInView || hasAnimated.current) return
     hasAnimated.current = true
+    if (reduceMotion) return // shown directly below, no scramble
 
     let start: number | null = null
     const targetLength = text.length
@@ -53,7 +55,7 @@ export default function PixelReveal({ text, className, style, duration = 750 }: 
     }
 
     requestAnimationFrame(step)
-  }, [isInView, text, duration])
+  }, [isInView, text, duration, reduceMotion])
 
   return (
     <h2
@@ -65,7 +67,9 @@ export default function PixelReveal({ text, className, style, duration = 750 }: 
         fontVariantNumeric: 'tabular-nums',
       }}
     >
-      {displayText || text.replace(/[^\s]/g, '█')}
+      {/* Screen readers and crawlers get the real heading, never the █ placeholder */}
+      <span className="sr-only">{text}</span>
+      <span aria-hidden="true">{reduceMotion ? text : displayText || text.replace(/[^\s]/g, '█')}</span>
     </h2>
   )
 }

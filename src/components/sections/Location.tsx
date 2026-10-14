@@ -208,11 +208,11 @@ export default function Location() {
             <div style={{
               position: 'absolute', bottom: 20, left: 20,
               fontFamily: 'var(--font-mono)',
-              fontSize: '8px',
+              fontSize: 'var(--fs-2xs)',
               letterSpacing: '0.3em',
               textTransform: 'uppercase',
               color: 'var(--gold)',
-              background: 'rgba(7,8,12,0.85)',
+              background: 'var(--header-bg)',
               padding: '6px 12px',
               border: '1px solid var(--border)',
             }}>
@@ -238,7 +238,7 @@ export default function Location() {
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 28 }}>
               <p style={{
                 fontFamily: 'var(--font-mono)',
-                fontSize: '8px',
+                fontSize: 'var(--fs-2xs)',
                 letterSpacing: '0.35em',
                 textTransform: 'uppercase',
                 color: 'var(--gold)',
@@ -249,7 +249,7 @@ export default function Location() {
               {localTime && (
                 <span style={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '9px',
+                  fontSize: 'var(--fs-xs)',
                   color: 'var(--gold)',
                   letterSpacing: '0.08em',
                 }}>
@@ -277,7 +277,7 @@ export default function Location() {
                 <div>
                   <p style={{
                     fontFamily: 'var(--font-mono)',
-                    fontSize: '7px',
+                    fontSize: 'var(--fs-2xs)',
                     letterSpacing: '0.3em',
                     textTransform: 'uppercase',
                     color: 'var(--muted)',
@@ -331,10 +331,10 @@ export default function Location() {
               <span style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', fontWeight: 300, color: 'var(--cream)' }}>
                 {d.time}
               </span>
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', letterSpacing: '0.2em', color: 'var(--gold)' }}>
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--fs-2xs)', letterSpacing: '0.2em', color: 'var(--gold)' }}>
                 to {d.city}
               </span>
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', color: 'var(--muted)' }}>
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--fs-2xs)', color: 'var(--muted)' }}>
                 {d.mode}
               </span>
             </div>
@@ -352,7 +352,7 @@ export default function Location() {
           >
             {hudStatus === 'idle' && (
               <div style={{ display: 'flex', flexDirection: 'column', gap: 8, height: '100%', justifyContent: 'center' }}>
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', letterSpacing: '0.12em', color: 'var(--muted)', textTransform: 'uppercase' }}>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--fs-2xs)', letterSpacing: '0.12em', color: 'var(--muted)', textTransform: 'uppercase' }}>
                   // Local Node Link
                 </span>
                 <button
@@ -360,7 +360,7 @@ export default function Location() {
                   className="btn-gold"
                   style={{
                     padding: '8px 12px',
-                    fontSize: '8px',
+                    fontSize: 'var(--fs-2xs)',
                     width: '100%',
                     justifyContent: 'center',
                     letterSpacing: '0.15em',
@@ -375,7 +375,7 @@ export default function Location() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: 2, height: '100%', justifyContent: 'center' }}>
                 <div style={{ maxHeight: 60, overflowY: 'hidden', display: 'flex', flexDirection: 'column', gap: 2 }}>
                   {logs.slice(-3).map((log, li) => (
-                    <span key={li} style={{ fontFamily: 'var(--font-mono)', fontSize: '7.5px', color: 'var(--gold)', opacity: 0.9 }}>
+                    <span key={li} style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--fs-2xs)', color: 'var(--gold)', opacity: 0.9 }}>
                       {log}
                     </span>
                   ))}
@@ -389,14 +389,14 @@ export default function Location() {
                   <span style={{ fontFamily: 'var(--font-serif)', fontSize: '1.4rem', fontWeight: 300, color: 'var(--cream)' }}>
                     {distance.toLocaleString()} km
                   </span>
-                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', color: 'var(--gold)' }}>
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--fs-2xs)', color: 'var(--gold)' }}>
                     {ping}ms
                   </span>
                 </div>
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', letterSpacing: '0.22em', color: 'var(--gold)', textTransform: 'uppercase', lineHeight: 1 }}>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--fs-2xs)', letterSpacing: '0.22em', color: 'var(--gold)', textTransform: 'uppercase', lineHeight: 1 }}>
                   Node Linked
                 </span>
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '7px', color: 'var(--muted)', lineHeight: 1 }}>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--fs-2xs)', color: 'var(--muted)', lineHeight: 1 }}>
                   Latency: stable // Gateway: active
                 </span>
               </div>

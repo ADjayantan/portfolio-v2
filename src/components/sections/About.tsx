@@ -65,7 +65,7 @@ export default function About() {
               }}
             />
             <p style={{
-              fontFamily: 'var(--font-mono)', fontSize: '8px',
+              fontFamily: 'var(--font-mono)', fontSize: 'var(--fs-2xs)',
               letterSpacing: '0.25em', textTransform: 'uppercase',
               color: 'var(--muted)', marginTop: 14,
             }}>
@@ -92,9 +92,9 @@ export default function About() {
                 }}
               >
                 <span style={{
-                  fontFamily: 'var(--font-mono)', fontSize: '8px',
+                  fontFamily: 'var(--font-mono)', fontSize: 'var(--fs-2xs)',
                   letterSpacing: '0.3em', textTransform: 'uppercase',
-                  color: 'var(--gold)', opacity: 0.8, flexShrink: 0,
+                  color: 'var(--gold)', flexShrink: 0,
                 }}>
                   {d.label}
                 </span>

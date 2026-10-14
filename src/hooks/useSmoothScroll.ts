@@ -3,6 +3,7 @@ import Lenis from '@studio-freight/lenis'
 
 export function useSmoothScroll() {
   useEffect(() => {
+    if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return
     const lenis = new Lenis({
       duration: 0.85,                          // was 1.35 — too sluggish
       easing: (t: number) => 1 - Math.pow(1 - t, 3),   // simpler cubic ease-out

@@ -120,7 +120,7 @@ export function ScrollMarquee({ text, separator = '·' }: ScrollMarqueeProps) {
       >
         <span style={{
           fontFamily: 'var(--font-mono)',
-          fontSize: '10px',
+          fontSize: 'var(--fs-sm)',
           letterSpacing: '0.35em',
           textTransform: 'uppercase',
           color: 'var(--muted)',

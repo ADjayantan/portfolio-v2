@@ -51,6 +51,11 @@ async function fetchLeetCodeStats() {
           languageName
           problemsSolved
         }
+        tagProblemCounts {
+          advanced { tagName problemsSolved }
+          intermediate { tagName problemsSolved }
+          fundamental { tagName problemsSolved }
+        }
       }
       userContestRanking(username: $username) {
         rating
@@ -94,6 +99,12 @@ async function fetchLeetCodeStats() {
   const contest = data.userContestRanking || { rating: 0, globalRanking: 0, attendedContestsCount: 0, topPercentage: 0 }
   const badges = data.matchedUser.badges || []
   const java = (data.matchedUser.languageProblemCount || []).find((l) => l.languageName === 'Java')
+  const tags = data.matchedUser.tagProblemCounts || {}
+  const topTopics = ['advanced', 'intermediate', 'fundamental']
+    .flatMap((k) => tags[k] || [])
+    .sort((a, b) => b.problemsSolved - a.problemsSolved)
+    .slice(0, 8)
+    .map((t) => ({ tag: t.tagName, solved: t.problemsSolved }))
 
   return {
     total: count('All'),
@@ -109,6 +120,7 @@ async function fetchLeetCodeStats() {
     badges: badges.length,
     badgeNames: badges.map((b) => b.displayName),
     javaSolved: java ? java.problemsSolved : 0,
+    topTopics,
   }
 }
 

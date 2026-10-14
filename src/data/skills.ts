@@ -59,9 +59,3 @@ export const skills: SkillCategory[] = [
     ],
   },
 ];
-
-export const levelColors: Record<string, string> = {
-  core: '#22d3ee',
-  proficient: '#a78bfa',
-  familiar: '#6b7280',
-};

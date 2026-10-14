@@ -5,7 +5,7 @@ import PixelReveal from '../layout/PixelReveal'
 
 const monoLabel = {
   fontFamily: 'var(--font-mono)',
-  fontSize: '8px',
+  fontSize: 'var(--fs-2xs)',
   letterSpacing: '0.3em',
   textTransform: 'uppercase' as const,
   color: 'var(--gold)',
@@ -41,14 +41,14 @@ function RecognitionList({ label, items, delay }: { label: string; items: Recogn
               {item.title}
             </p>
             <p style={{
-              fontFamily: 'var(--font-mono)', fontSize: '9px', letterSpacing: '0.06em',
+              fontFamily: 'var(--font-mono)', fontSize: 'var(--fs-xs)', letterSpacing: '0.06em',
               color: 'var(--muted)', lineHeight: 1.7, marginTop: 4,
             }}>
               {item.detail}
             </p>
           </div>
           <span style={{
-            fontFamily: 'var(--font-mono)', fontSize: '8px', letterSpacing: '0.2em',
+            fontFamily: 'var(--font-mono)', fontSize: 'var(--fs-2xs)', letterSpacing: '0.2em',
             textTransform: 'uppercase', color: 'var(--muted)', whiteSpace: 'nowrap',
           }}>
             {item.date}
@@ -112,7 +112,7 @@ export default function Experience() {
                   {job.role}
                 </p>
                 <p style={{
-                  fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.12em',
+                  fontFamily: 'var(--font-mono)', fontSize: 'var(--fs-sm)', letterSpacing: '0.12em',
                   color: 'var(--muted)', marginTop: 8,
                 }}>
                   {job.org} · {job.place}

@@ -17,7 +17,41 @@ export const leetcodeStats: LeetCodeStats = {
     "100 Days Badge 2026",
     "50 Days Badge 2026"
   ],
-  "javaSolved": 226
+  "javaSolved": 226,
+  "topTopics": [
+    {
+      "tag": "String",
+      "solved": 107
+    },
+    {
+      "tag": "Array",
+      "solved": 99
+    },
+    {
+      "tag": "Math",
+      "solved": 54
+    },
+    {
+      "tag": "Hash Table",
+      "solved": 42
+    },
+    {
+      "tag": "Sorting",
+      "solved": 30
+    },
+    {
+      "tag": "Two Pointers",
+      "solved": 30
+    },
+    {
+      "tag": "Dynamic Programming",
+      "solved": 21
+    },
+    {
+      "tag": "Bit Manipulation",
+      "solved": 20
+    }
+  ]
 }
 
 // Automated daily update from GitHub REST API

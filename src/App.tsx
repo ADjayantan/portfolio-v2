@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { MotionConfig } from 'framer-motion'
 import { ThemeProvider } from './hooks/useTheme'
 import { AudioProvider } from './hooks/useAudio'
 import { useSmoothScroll } from './hooks/useSmoothScroll'
@@ -26,6 +27,7 @@ function PortfolioApp() {
 
   return (
     <div style={{ background: 'var(--bg)', color: 'var(--text)', minHeight: '100vh' }}>
+      <a href="#main" className="skip-link">Skip to content</a>
       <SpaceBackground />          {/* fixed, z-index 0 */}
       {/* Global UI */}
       <Cursor />
@@ -42,7 +44,7 @@ function PortfolioApp() {
       }}>
         <Navbar />
 
-        <main>
+        <main id="main" tabIndex={-1}>
           {/* ── Hero ─────────────────────────── */}
           <Hero />
 
@@ -124,7 +126,9 @@ export default function App() {
   return (
     <ThemeProvider>
       <AudioProvider>
-        <PortfolioApp />
+        <MotionConfig reducedMotion="user">
+          <PortfolioApp />
+        </MotionConfig>
       </AudioProvider>
     </ThemeProvider>
   )

@@ -42,6 +42,8 @@ export interface Project {
   problem: string;
   solution: string;
   contributions: string;
+  category: 'ml' | 'backend';
+  highlights: string[]; // 2–3 short, verifiable results shown on the card
   tech: string[];
   links: {
     github: string;
@@ -75,6 +77,7 @@ export interface LeetCodeStats {
   badges: number;
   badgeNames: string[];
   javaSolved: number;
+  topTopics: { tag: string; solved: number }[];
 }
 
 export interface GitHubStats {

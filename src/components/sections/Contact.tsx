@@ -62,7 +62,7 @@ export default function Contact() {
           transition={{ delay: 0.3 }}
           style={{
             fontFamily: 'var(--font-mono)',
-            fontSize: '10px',
+            fontSize: 'var(--fs-sm)',
             letterSpacing: '0.18em',
             color: 'var(--muted)',
             marginBottom: 64,
@@ -124,7 +124,7 @@ export default function Contact() {
                 </p>
                 <p style={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '9px',
+                  fontSize: 'var(--fs-xs)',
                   letterSpacing: '0.1em',
                   color: 'var(--gold)',
                   marginBottom: 4,
@@ -133,7 +133,7 @@ export default function Contact() {
                 </p>
                 <p style={{
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '9px',
+                  fontSize: 'var(--fs-xs)',
                   color: 'var(--muted)',
                 }}>
                   {desc}
@@ -155,7 +155,7 @@ export default function Contact() {
             href={profile.links.resume}
             download="Jayantan_AD_Resume.pdf"
             className="btn-gold"
-            style={{ gap: 10, fontSize: '10px', padding: '14px 40px' }}
+            style={{ gap: 10, fontSize: 'var(--fs-sm)', padding: '14px 40px' }}
           >
             <Download size={13} strokeWidth={1.5} />
             Download Resume
