@@ -57,7 +57,7 @@ export const leetcodeStats: LeetCodeStats = {
 // Automated daily update from GitHub REST API
 export const githubStats: GitHubStats = {
   "repos": 30,
-  "followers": 3,
+  "followers": 4,
   "stars": 1,
   "forks": 0
 }
