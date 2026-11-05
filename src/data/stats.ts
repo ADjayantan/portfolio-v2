@@ -12,8 +12,9 @@ export const leetcodeStats: LeetCodeStats = {
   "topPercentage": 59.4,
   "activeDays": 203,
   "maxStreak": 106,
-  "badges": 2,
+  "badges": 3,
   "badgeNames": [
+    "200 Days Badge 2026",
     "100 Days Badge 2026",
     "50 Days Badge 2026"
   ],
