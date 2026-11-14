@@ -10,7 +10,7 @@ export const leetcodeStats: LeetCodeStats = {
   "globalRanking": 526333,
   "contestsAttended": 5,
   "topPercentage": 59.4,
-  "activeDays": 209,
+  "activeDays": 208,
   "maxStreak": 106,
   "badges": 3,
   "badgeNames": [
