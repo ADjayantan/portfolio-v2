@@ -1,99 +1,52 @@
 import { motion } from 'framer-motion'
 import { profile } from '../../data/profile'
 
-// Pixel art "< / >" code icon — 11 cols x 7 rows, 0=off 1=on
-const CODE_ART = [
-  '00000000000',
-  '01100001100',
-  '00110000110',
-  '00011011000',  // < / >
-  '00110000110',
-  '01100001100',
-  '00000000000',
-]
-
-// Mountain silhouette bar heights (normalized 0-1)
-const MOUNTAIN_BARS = Array.from({ length: 60 }, (_, i) => {
-  const x = i / 60
-  const h = Math.sin(x * Math.PI) * 0.7
-           + Math.sin(x * Math.PI * 4) * 0.15
-           + Math.sin(x * Math.PI * 9) * 0.06
-           + Math.cos(x * 6.2 + 1.2) * 0.09
-  return Math.max(0.03, h)
-})
-
-function PixelArt() {
-  const COLS = CODE_ART[0].length
-  const ROWS = CODE_ART.length
-  const SIZE = 5
-
-  return (
-    <div style={{ display: 'grid', gridTemplateRows: `repeat(${ROWS}, ${SIZE}px)`, gap: 2, width: 'fit-content', margin: '0 auto 28px' }}>
-      {CODE_ART.map((row, ri) => (
-        <div key={ri} style={{ display: 'grid', gridTemplateColumns: `repeat(${COLS}, ${SIZE}px)`, gap: 2 }}>
-          {row.split('').map((cell, ci) => (
-            <motion.div
-              key={ci}
-              initial={{ opacity: 0, scaleY: 0 }}
-              whileInView={{ opacity: cell === '1' ? 1 : 0, scaleY: cell === '1' ? 1 : 0 }}
-              viewport={{ once: true, amount: 0.5 }}
-              transition={{ duration: 0.3, delay: ci * 0.03 + ri * 0.05, ease: [0.33,1,0.68,1] }}
-              style={{
-                width: SIZE, height: SIZE,
-                background: 'var(--gold)',
-                transformOrigin: 'bottom',
-              }}
-            />
-          ))}
-        </div>
-      ))}
-    </div>
-  )
-}
-
-function MountainBars() {
-  return (
-    <div style={{
-      display: 'flex', alignItems: 'flex-end',
-      gap: 5,
-      height: 80, width: '100%', overflow: 'hidden',
-      marginBottom: 0, opacity: 0.45,
-      maskImage: 'linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%)',
-      WebkitMaskImage: 'linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%)',
-    }}>
-      {MOUNTAIN_BARS.map((h, i) => (
-        <motion.div
-          key={i}
-          initial={{ scaleY: 0 }}
-          whileInView={{ scaleY: 1 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.5, delay: i * 0.012, ease: [0.33,1,0.68,1] }}
-          style={{
-            flex: 1, height: `${h * 80}px`,
-            background: 'linear-gradient(180deg, var(--gold-light) 0%, var(--gold) 40%, rgba(30, 63, 216, 0.12) 80%, transparent 100%)',
-            borderTop: '1.5px solid var(--gold-light)',
-            borderRadius: '2px 2px 0 0',
-            transformOrigin: 'bottom',
-          }}
-        />
-      ))}
-    </div>
-  )
-}
+const DOT_CLUSTER = ['.', '·', '•', '●', '•', '·', '.'] as const
 
 export default function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer>
-      {/* Mountain bar silhouette — Son Daven style */}
-      <MountainBars />
-
-      {/* Main footer content */}
-      <div style={{ borderTop: '1px solid var(--border)', padding: '56px 40px 40px' }}>
-
-        {/* Pixel art code icon */}
-        <PixelArt />
+    <footer style={{ padding: '24px 24px 48px' }}>
+      <div
+        style={{
+          maxWidth: 1080,
+          margin: '0 auto',
+          padding: '48px 48px 36px',
+          background: 'var(--section-surface)',
+          backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)',
+          border: '1px solid var(--border)',
+          borderRadius: 16,
+          boxShadow: '0 20px 60px rgba(3, 6, 14, 0.38)',
+        }}
+      >
+        {/* ASCII dot-matrix emblem */}
+        <div
+          aria-hidden="true"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: 10,
+            marginBottom: 24,
+            fontFamily: 'var(--font-mono)',
+            fontSize: '13px',
+            color: 'var(--gold-light)',
+            textShadow: '0 0 14px rgba(56, 189, 248, 0.6)',
+          }}
+        >
+          {DOT_CLUSTER.map((ch, i) => (
+            <span
+              key={i}
+              style={{
+                opacity: i === 3 ? 1 : i === 2 || i === 4 ? 0.72 : 0.45,
+              }}
+            >
+              {ch}
+            </span>
+          ))}
+        </div>
 
         {/* Large logo text */}
         <motion.p
@@ -103,23 +56,23 @@ export default function Footer() {
           transition={{ duration: 0.7 }}
           style={{
             fontFamily: 'var(--font-serif)',
-            fontSize: 'clamp(3rem, 8vw, 6rem)',
+            fontSize: 'clamp(2.6rem, 7vw, 5.2rem)',
             fontWeight: 300,
             color: 'var(--cream)',
-            letterSpacing: '0.12em',
+            letterSpacing: '0.1em',
             textAlign: 'center',
             lineHeight: 1,
-            marginBottom: 8,
+            marginBottom: 12,
           }}
         >
-          AD Jayantan
+          AD <em style={{ fontStyle: 'italic' }}>Jayantan</em>
         </motion.p>
 
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
+          transition={{ delay: 0.15 }}
           style={{
             fontFamily: 'var(--font-mono)',
             fontSize: 'var(--fs-xs)',
@@ -127,7 +80,7 @@ export default function Footer() {
             textTransform: 'uppercase',
             color: 'var(--gold)',
             textAlign: 'center',
-            marginBottom: 48,
+            marginBottom: 40,
           }}
         >
           {profile.title} · Coimbatore, India
@@ -140,13 +93,10 @@ export default function Footer() {
           borderTop: '1px solid var(--border)', paddingTop: 24,
         }}>
           <p style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--fs-2xs)', letterSpacing: '0.2em', color: 'var(--muted)' }}>
-            © {year} · All rights reserved
+            © {year} · AD Jayantan
           </p>
           <p style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--fs-2xs)', letterSpacing: '0.2em', color: 'var(--muted)' }}>
-            Built with React + Vite + Framer Motion
-          </p>
-          <p style={{ fontFamily: 'var(--font-mono)', fontSize: 'var(--fs-2xs)', letterSpacing: '0.2em', color: 'var(--muted)' }}>
-            Inspired by Son Daven
+            Built with React + Vite + WebGL2
           </p>
         </div>
       </div>
