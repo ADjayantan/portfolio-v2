@@ -1,23 +1,19 @@
 import { useState, useEffect } from 'react'
-import { Moon, Sun } from 'lucide-react'
-import { useTheme } from '../../hooks/useTheme'
-import SoundToggle from './SoundToggle'
 import Magnetic from './Magnetic'
 
 const NAV_LINKS = [
-  { label: 'About',    href: '#about' },
+  { label: 'About',      href: '#about' },
   { label: 'Experience', href: '#experience' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'DSA',      href: '#dsa' },
-  { label: 'Skills',   href: '#skills' },
-  { label: 'Location', href: '#location' },
-  { label: 'Contact',  href: '#contact' },
+  { label: 'Projects',   href: '#projects' },
+  { label: 'DSA',        href: '#dsa' },
+  { label: 'Skills',     href: '#skills' },
+  { label: 'Location',   href: '#location' },
+  { label: 'Contact',    href: '#contact' },
 ]
 
 const SECTION_IDS = ['about', 'experience', 'projects', 'dsa', 'skills', 'location', 'contact']
 
 export default function Navbar() {
-  const { theme, toggle } = useTheme()
   const [scrolled,  setScrolled]  = useState(false)
   const [menuOpen,  setMenuOpen]  = useState(false)
   const [activeSection, setActive] = useState('')
@@ -133,58 +129,10 @@ export default function Navbar() {
               </button>
             )
           })}
-
-          {/* Sound toggle */}
-          <Magnetic>
-            <SoundToggle />
-          </Magnetic>
-
-          {/* Theme toggle */}
-          <Magnetic>
-            <button
-              onClick={toggle}
-              style={{
-                background: 'none', border: '1px solid var(--border-light)',
-                width: 34, height: 34,
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                color: 'var(--muted)', cursor: 'pointer',
-                transition: 'color 0.2s, border-color 0.2s',
-                flexShrink: 0,
-              }}
-              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--gold)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--gold-border)' }}
-              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--muted)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-light)' }}
-              aria-label="Toggle theme"
-            >
-              {theme === 'dark' ? <Sun size={13} strokeWidth={1.5} /> : <Moon size={13} strokeWidth={1.5} />}
-            </button>
-          </Magnetic>
         </nav>
 
-        {/* Mobile controls & hamburger */}
+        {/* Mobile hamburger */}
         <div style={{ marginLeft: 'auto', display: 'none', gap: 10, alignItems: 'center' }} className="nav-mobile-controls">
-          <Magnetic>
-            <SoundToggle />
-          </Magnetic>
-          
-          <Magnetic>
-            <button
-              onClick={toggle}
-              style={{
-                background: 'none', border: '1px solid var(--border-light)',
-                width: 34, height: 34,
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                color: 'var(--muted)', cursor: 'pointer',
-                transition: 'color 0.2s, border-color 0.2s',
-                flexShrink: 0,
-              }}
-              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--gold)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--gold-border)' }}
-              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--muted)'; (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-light)' }}
-              aria-label="Toggle theme"
-            >
-              {theme === 'dark' ? <Sun size={13} strokeWidth={1.5} /> : <Moon size={13} strokeWidth={1.5} />}
-            </button>
-          </Magnetic>
-
           <Magnetic>
             <button
               onClick={() => setMenuOpen((o) => !o)}
