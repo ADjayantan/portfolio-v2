@@ -194,14 +194,14 @@ export default function Location() {
                 minHeight: 380,
                 border: 'none',
                 display: 'block',
-                filter: 'grayscale(85%) contrast(1.15) brightness(0.55) sepia(15%)',
+                filter: 'grayscale(85%) contrast(1.15) brightness(0.55) hue-rotate(185deg) saturate(1.4)',
               }}
               loading="lazy"
             />
-            {/* Gold overlay tint */}
+            {/* Atmosphere overlay tint */}
             <div style={{
               position: 'absolute', inset: 0,
-              background: 'rgba(201,169,110,0.04)',
+              background: 'rgba(30, 63, 216, 0.08)',
               pointerEvents: 'none',
             }} />
             {/* Location pin label */}
@@ -347,7 +347,7 @@ export default function Location() {
               flexDirection: 'column',
               justifyContent: 'space-between',
               minHeight: 88,
-              background: 'rgba(201, 169, 110, 0.012)',
+              background: 'rgba(56, 189, 248, 0.025)',
             }}
           >
             {hudStatus === 'idle' && (

@@ -55,8 +55,11 @@ function MountainBars() {
   return (
     <div style={{
       display: 'flex', alignItems: 'flex-end',
+      gap: 5,
       height: 80, width: '100%', overflow: 'hidden',
-      marginBottom: 0, opacity: 0.35,
+      marginBottom: 0, opacity: 0.45,
+      maskImage: 'linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%)',
+      WebkitMaskImage: 'linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%)',
     }}>
       {MOUNTAIN_BARS.map((h, i) => (
         <motion.div
@@ -67,9 +70,10 @@ function MountainBars() {
           transition={{ duration: 0.5, delay: i * 0.012, ease: [0.33,1,0.68,1] }}
           style={{
             flex: 1, height: `${h * 80}px`,
-            background: 'var(--gold)',
+            background: 'linear-gradient(180deg, var(--gold-light) 0%, var(--gold) 40%, rgba(30, 63, 216, 0.12) 80%, transparent 100%)',
+            borderTop: '1.5px solid var(--gold-light)',
+            borderRadius: '2px 2px 0 0',
             transformOrigin: 'bottom',
-            marginRight: 1,
           }}
         />
       ))}

@@ -12,6 +12,8 @@ interface MarqueeProps {
   borderBottom?: boolean
 }
 
+const EDGE_MASK = 'linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%)'
+
 export default function Marquee({
   text,
   separator = '·',
@@ -39,14 +41,10 @@ export default function Marquee({
         background: 'transparent',
         cursor: 'default',
         userSelect: 'none',
+        maskImage: EDGE_MASK,
+        WebkitMaskImage: EDGE_MASK,
       }}
     >
-      {/* Fade edges */}
-      <div style={{
-        position: 'absolute', inset: 0, zIndex: 2, pointerEvents: 'none',
-        background: 'linear-gradient(90deg, var(--bg) 0%, transparent 8%, transparent 92%, var(--bg) 100%)',
-      }} />
-
       <motion.div
         style={{
           display: 'flex',
@@ -103,13 +101,12 @@ export function ScrollMarquee({ text, separator = '·' }: ScrollMarqueeProps) {
         padding: '24px 0',
         borderTop: '1px solid var(--border)',
         borderBottom: '1px solid var(--border)',
+        position: 'relative',
         userSelect: 'none',
+        maskImage: EDGE_MASK,
+        WebkitMaskImage: EDGE_MASK,
       }}
     >
-      <div style={{
-        position: 'absolute', inset: 0, zIndex: 2, pointerEvents: 'none',
-        background: 'linear-gradient(90deg, var(--bg) 0%, transparent 8%, transparent 92%, var(--bg) 100%)',
-      }} />
       <motion.div
         style={{
           display: 'flex',
@@ -123,7 +120,7 @@ export function ScrollMarquee({ text, separator = '·' }: ScrollMarqueeProps) {
           fontSize: 'var(--fs-sm)',
           letterSpacing: '0.35em',
           textTransform: 'uppercase',
-          color: 'var(--muted)',
+          color: 'var(--text)',
         }}>
           {repeated}
         </span>

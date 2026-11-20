@@ -76,7 +76,7 @@ export default function Cursor() {
           scale,
           translateX: '-50%', translateY: '-50%',
           width: 30, height: 30, borderRadius: '50%',
-          border: '1px solid rgba(201,169,110,0.5)',
+          border: '1px solid var(--gold-border)',
           zIndex: 99997, pointerEvents: 'none',
           willChange: 'transform',
         }}
@@ -84,11 +84,10 @@ export default function Cursor() {
 
       <style>{`
         @media (hover: none) {
-          * { cursor: auto !important; }
           .custom-cursor-dot, .custom-cursor-ring { display: none !important; }
         }
         @media (hover: hover) {
-          * { cursor: none !important; }
+          .custom-cursor-dot { display: none !important; }
         }
       `}</style>
     </>

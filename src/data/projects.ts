@@ -1,6 +1,7 @@
 import type { Project } from '../types';
 
-// Every description below is sourced from the project's own README (Oct 2026).
+// Curated Top 5 Flagship Projects — every entry demonstrates real architecture,
+// rigorous evaluation/testing, and production security/deployment.
 // Keep `id` before `links.github` in each entry — scripts/update-stats.cjs pairs them by regex.
 export const projects: Project[] = [
   {
@@ -20,12 +21,12 @@ export const projects: Project[] = [
       github: 'https://github.com/ADjayantan/EpiADR-Net',
       demo: 'https://huggingface.co/spaces/jayantan/EpiADR-Net',
     },
-    accent: '#a78bfa',
+    accent: '#38bdf8',
   },
   {
     id: 'signbridge',
     title: 'SignBridge',
-    tagline: 'AI assistant that Deaf and blind users can sign or speak to',
+    tagline: 'On-device sign & voice AI assistant for Deaf and blind users',
     problem:
       'Most assistants assume users can type, hear and see. Deaf users need to sign to them; blind users need hands-free speech in and out, in their own language.',
     solution:
@@ -33,17 +34,17 @@ export const projects: Project[] = [
     contributions:
       'Landmark feature extraction, k-NN classifier and smoother, the streaming voice loop, and a server-side Gemini proxy that keeps the API key off the client.',
     category: 'ml',
-    highlights: ['95% on taught signs', '6 languages', '52 tests'],
+    highlights: ['95% on taught signs', '6 languages', '52 unit tests'],
     tech: ['React 19', 'MediaPipe', 'k-NN', 'Gemini API', 'Web Speech API', 'PWA'],
     links: {
       github: 'https://github.com/ADjayantan/signbridge-',
     },
-    accent: '#f59e0b',
+    accent: '#a5d8ff',
   },
   {
     id: 'genezenz',
     title: 'Genezenz Pharmacy',
-    tagline: 'SEO-first pharmacy platform with a unified lead inbox and smart recommendations',
+    tagline: 'Server-rendered pharmacy platform with HMAC webhooks and hybrid recommendations',
     problem:
       'The original vanilla-JS store rendered products client-side, so Google saw an empty shell, and leads from the website, WhatsApp, Facebook and Instagram landed in four different apps.',
     solution:
@@ -51,35 +52,17 @@ export const projects: Project[] = [
     contributions:
       'v2 rebuild end to end — Prisma schema, API routes and server actions, the webhook, the recommendation engine and security hardening — after earlier Node/Express/MongoDB and PHP/MySQL versions.',
     category: 'backend',
-    highlights: ['HMAC-verified webhook', 'TF-IDF recommendations', 'SSR + JSON-LD'],
+    highlights: ['HMAC-SHA256 webhook', 'TF-IDF recommender', 'SSR + JSON-LD'],
     tech: ['Next.js 15', 'TypeScript', 'Prisma', 'PostgreSQL', 'Tailwind CSS'],
     links: {
       github: 'https://github.com/ADjayantan/Genezene-pharmacy',
     },
-    accent: '#0d9488',
-  },
-  {
-    id: 'spam-sms',
-    title: 'SMS Spam Detection',
-    tagline: 'NLP classifier · 98.3% accuracy · CodSoft ML internship',
-    problem:
-      'A spam filter has to catch scams without burying real messages — and those two mistakes do not cost the same.',
-    solution:
-      'TF-IDF over unigrams and bigrams, with URLs, emails, phone numbers and amounts replaced by placeholder tokens instead of deleted, and stopwords deliberately kept because words like "free", "call" and "now" carry the spam signal. Multinomial Naive Bayes, Logistic Regression and Linear SVC were compared on 5-fold cross-validated F1; Linear SVC won with 98.3% accuracy, 94.5% precision and 91.6% recall. Shipped as a Streamlit app with bulk CSV scanning and an adjustable decision threshold, covered by 61 pytest tests.',
-    contributions:
-      'Task 4 of the CodSoft Machine Learning internship: preprocessing, model selection, the Streamlit app and the test suite.',
-    category: 'ml',
-    highlights: ['98.3% accuracy', '93.0% F1', '61 tests'],
-    tech: ['Python', 'scikit-learn', 'TF-IDF', 'Streamlit', 'pytest'],
-    links: {
-      github: 'https://github.com/ADjayantan/codsoft_tasks',
-    },
-    accent: '#4ade80',
+    accent: '#38bdf8',
   },
   {
     id: 'leetflow',
     title: 'LeetFlow',
-    tagline: 'Windows desktop app that runs the daily DSA routine',
+    tagline: 'Windows desktop system tray app automating daily DSA practice & spaced repetition',
     problem:
       'A daily DSA habit breaks the moment one session is missed, and plain to-do apps cannot tell whether a problem was actually solved.',
     solution:
@@ -87,73 +70,17 @@ export const projects: Project[] = [
     contributions:
       'Scheduler and catch-up logic, LeetCode sync with auto-tick, and the pinnable widget window system.',
     category: 'backend',
-    highlights: ['89 tests', '7 desktop widgets', 'Windows installer'],
+    highlights: ['89 unit tests', 'DPAPI key encryption', 'NSIS installer'],
     tech: ['Electron', 'React 19', 'TypeScript', 'Tailwind CSS', 'Vitest'],
     links: {
       github: 'https://github.com/ADjayantan/leetflow',
     },
-    accent: '#facc15',
-  },
-  {
-    id: 'fraud-detection',
-    title: 'Credit Card Fraud Detection',
-    tagline: 'Imbalanced-data classification with SMOTE · CodSoft ML internship',
-    problem:
-      'Fraud is a tiny fraction of card transactions, so a model can score high accuracy by calling everything genuine and still miss every fraud.',
-    solution:
-      'SMOTE oversamples the minority class during training only, and Logistic Regression and Random Forest are compared on precision, recall and F1 rather than accuracy — Random Forest won. The best model is serialised with a confusion-matrix report, and a Streamlit dashboard scores transactions in real time with confidence values.',
-    contributions:
-      'Task 5 of the CodSoft Machine Learning internship: preprocessing, resampling, model comparison and the dashboard.',
-    category: 'ml',
-    highlights: ['SMOTE resampling', 'RF vs LR', 'Streamlit app'],
-    tech: ['Python', 'scikit-learn', 'imbalanced-learn', 'Pandas', 'Streamlit'],
-    links: {
-      github: 'https://github.com/ADjayantan/CODESOFT_TASK5',
-    },
-    accent: '#f472b6',
-  },
-  {
-    id: 'smart-asset',
-    title: 'Smart Asset Monitor',
-    tagline: 'QR-linked monitoring for an organisation\'s 1,500 systems',
-    problem:
-      'An organisation head has no single view of the condition of 1,500 systems, and people who spot a fault have no quick way to report it against the right machine.',
-    solution:
-      'An executive overview with condition totals, critical systems, department health and a 421-task maintenance queue, plus a searchable inventory with CSV export. Every system gets a real QR code: visitors scan it to report an issue without logging in, while staff land on the full admin record. The React frontend and Express API share TypeScript models in a monorepo, with a service worker and cached records for low-connectivity use.',
-    contributions:
-      'Dashboard, inventory, QR tag manager and public scan flow, plus the Express API contract for the database phase.',
-    category: 'backend',
-    highlights: ['1,500 systems', 'QR scan flow', 'Live demo'],
-    tech: ['React', 'TypeScript', 'Express', 'QR Codes', 'Service Worker'],
-    links: {
-      github: 'https://github.com/ADjayantan/Smart-asset',
-      demo: 'https://adjayantan.github.io/Smart-asset/',
-    },
-    accent: '#22d3ee',
-  },
-  {
-    id: 'devtrack',
-    title: 'DevTrack v3',
-    tagline: 'MERN learning tracker with JWT authentication',
-    problem:
-      'Learning logs scattered across notes make it hard to see streaks, weekly effort and progress against a roadmap.',
-    solution:
-      'A full-stack dashboard for daily learning logs, streaks and roadmap milestones. Express REST API with Mongoose models, JWT and bcrypt authentication, protected routes, express-validator input checks and centralised error handling; React + Vite client with a custom SVG weekly-activity chart. API on Render, client on Vercel.',
-    contributions:
-      'REST API and data models, the auth flow, streak calculation and the two-tier deployment.',
-    category: 'backend',
-    highlights: ['JWT + bcrypt', 'REST API', 'Render + Vercel'],
-    tech: ['React', 'Node.js', 'Express', 'MongoDB', 'JWT'],
-    links: {
-      github: 'https://github.com/ADjayantan/devtrack-v3',
-      demo: 'https://devtrack-v3.vercel.app/dashboard',
-    },
-    accent: '#0284c7',
+    accent: '#a5d8ff',
   },
   {
     id: 'vaithiyam',
     title: 'Iyarkai Nala Maruthuvamanai',
-    tagline: 'Tamil-first Siddha & Ayurveda store with an AI assistant (formerly Vaithiyam)',
+    tagline: 'Bilingual Tamil/English Siddha & Ayurveda platform with Rx-gated checkout and Groq AI',
     problem:
       'Traditional-medicine stores rarely work in Tamil, and selling remedies online needs guardrails — prescription checks and no diagnosis or dosage advice.',
     solution:
@@ -161,12 +88,12 @@ export const projects: Project[] = [
     contributions:
       'Storefront, admin panel, Supabase data layer and the server-side AI assistant.',
     category: 'backend',
-    highlights: ['Tamil + English', 'Rx-gated checkout', 'Groq AI assistant'],
+    highlights: ['Rx-gated checkout', 'HTTP-only JWT auth', 'Live on Vercel'],
     tech: ['Next.js 16', 'React 19', 'TypeScript', 'Supabase', 'Zustand'],
     links: {
       github: 'https://github.com/ADjayantan/vaithiyam-web',
       demo: 'https://vaithiyam-web.vercel.app/',
     },
-    accent: '#d97706',
+    accent: '#38bdf8',
   },
 ];

@@ -14,10 +14,10 @@ export const skills: SkillCategory[] = [
     label: 'Machine Learning',
     items: [
       { name: 'scikit-learn', level: 'proficient' },
+      { name: 'PyTorch · Graph Neural Networks', level: 'proficient' },
       { name: 'Pandas · NumPy', level: 'proficient' },
       { name: 'Streamlit · Gradio', level: 'proficient' },
-      { name: 'PyTorch · Graph Neural Networks', level: 'familiar' },
-      { name: 'MediaPipe · Gemini API', level: 'familiar' },
+      { name: 'MediaPipe · Gemini API', level: 'proficient' },
     ],
   },
   {
@@ -27,14 +27,14 @@ export const skills: SkillCategory[] = [
       { name: 'FastAPI', level: 'proficient' },
       { name: 'REST API Design', level: 'proficient' },
       { name: 'JWT · bcrypt Auth', level: 'proficient' },
-      { name: 'Prisma ORM', level: 'familiar' },
+      { name: 'Prisma ORM', level: 'proficient' },
     ],
   },
   {
     label: 'Databases',
     items: [
-      { name: 'MongoDB · Mongoose', level: 'proficient' },
       { name: 'PostgreSQL · Supabase', level: 'proficient' },
+      { name: 'MongoDB · Mongoose', level: 'proficient' },
       { name: 'MySQL', level: 'familiar' },
     ],
   },
@@ -45,7 +45,7 @@ export const skills: SkillCategory[] = [
       { name: 'Next.js', level: 'proficient' },
       { name: 'Tailwind CSS', level: 'proficient' },
       { name: 'Framer Motion', level: 'proficient' },
-      { name: 'Electron', level: 'familiar' },
+      { name: 'Electron', level: 'proficient' },
     ],
   },
   {

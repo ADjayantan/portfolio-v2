@@ -13,12 +13,12 @@ interface StatItem {
 }
 
 const STATS: StatItem[] = [
-  { value: leetcodeStats.total,         label: 'Problems Solved',  sub: `Easy ${leetcodeStats.easy} · Med ${leetcodeStats.medium} · Hard ${leetcodeStats.hard}` },
-  { value: leetcodeStats.contestRating, label: 'Contest Rating',   sub: `Top ${leetcodeStats.topPercentage}% · ${leetcodeStats.contestsAttended} contests` },
-  { value: leetcodeStats.maxStreak,     label: 'Max Streak (days)', sub: `${leetcodeStats.activeDays} active days in the past year` },
-  { value: leetcodeStats.javaSolved,    label: 'Solved in Java',   sub: 'Primary DSA language' },
-  { value: leetcodeStats.badges,        label: 'LeetCode Badges',  sub: leetcodeStats.badgeNames.join(' · ') || 'Annual badges' },
-  { value: githubStats.repos,           label: 'Public Repos',     sub: 'Open source on GitHub' },
+  { value: leetcodeStats.total,      label: 'Problems Solved',  sub: `Easy ${leetcodeStats.easy} · Med ${leetcodeStats.medium} · Hard ${leetcodeStats.hard}` },
+  { value: leetcodeStats.javaSolved, label: 'Solved in Java',   sub: 'Primary DSA & interview language' },
+  { value: leetcodeStats.activeDays, label: 'Active Days',      sub: 'Consistent daily practice in the past year' },
+  { value: leetcodeStats.maxStreak,  label: 'Max Streak (days)', sub: 'Unbroken daily problem-solving run' },
+  { value: leetcodeStats.badges,     label: 'LeetCode Badges',  sub: leetcodeStats.badgeNames.join(' · ') || 'Annual consistency badges' },
+  { value: githubStats.repos,        label: 'Public Repos',     sub: 'Open-source projects on GitHub' },
 ]
 
 function useCountUp(target: number, duration = 1600, start = false) {

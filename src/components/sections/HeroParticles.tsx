@@ -39,14 +39,14 @@ export default function HeroParticles() {
     // Color definitions in RGB
     const colors = isDark
       ? [
-          { r: 201, g: 169, b: 110 }, // Gold
-          { r: 232, g: 223, b: 200 }, // Cream
-          { r: 110, g: 100, b: 200 }, // Indigo
+          { r: 56,  g: 189, b: 248 }, // Sky Cyan
+          { r: 165, g: 216, b: 255 }, // Ice Blue
+          { r: 30,  g: 63,  b: 216 }, // Cobalt
         ]
       : [
-          { r: 154, g: 111, b: 46 },  // Light Gold
-          { r: 74,  g: 68,  b: 56 },  // Light Text (Dark Brown)
-          { r: 138, g: 126, b: 110 }, // Light Muted
+          { r: 30,  g: 63,  b: 216 }, // Cobalt
+          { r: 39,  g: 54,  b: 84  }, // Slate Ink
+          { r: 80,  g: 99,  b: 135 }, // Muted Slate
         ]
 
     // Initialize particles

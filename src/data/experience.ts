@@ -8,6 +8,11 @@ export const experience: ExperienceItem[] = [
     period: 'Mar 2026 — Present',
     place: 'Coimbatore · Remote',
     current: true,
+    points: [
+      'Design and maintain backend REST APIs and service modules using Python and Node.js, handling request validation, authentication, and structured error handling.',
+      'Optimize relational and document database queries, schema integrations, and data-processing pipelines to reduce endpoint latency and improve reliability.',
+      'Collaborate in an agile engineering workflow — shipping production features, writing automated tests, and participating in code reviews and sprint releases.',
+    ],
   },
   {
     role: 'Machine Learning Intern (Virtual)',
@@ -15,8 +20,7 @@ export const experience: ExperienceItem[] = [
     period: 'Sep 2026',
     place: 'Remote · 1 month',
     points: [
-      'SMS spam classifier — Linear SVC chosen on cross-validated F1: 98.3% accuracy, 93.0% F1, 61 pytest tests, Streamlit app.',
-      'Credit-card fraud detection — SMOTE for severe class imbalance, Random Forest vs Logistic Regression, real-time Streamlit dashboard.',
+      'Built and evaluated end-to-end scikit-learn classification pipelines (Linear SVC achieving 98.3% accuracy / 93.0% F1 and SMOTE-balanced Random Forest), shipped as interactive Streamlit dashboards with 61 pytest unit tests.',
     ],
   },
 ];

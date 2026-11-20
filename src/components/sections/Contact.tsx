@@ -99,7 +99,7 @@ export default function Contact() {
                 textDecoration: 'none',
                 transition: 'background 0.25s',
               }}
-              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = 'rgba(201,169,110,0.03)')}
+              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = 'var(--gold-dim)')}
               onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = 'transparent')}
             >
               <div style={{

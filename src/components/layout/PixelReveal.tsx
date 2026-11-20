@@ -8,7 +8,7 @@ interface PixelRevealProps {
   duration?: number // duration in ms, default 750
 }
 
-const CHARS = '░▒▓██▓▒░01X█'
+const CHARS = '.·•●·•●.·•●'
 
 export default function PixelReveal({ text, className, style, duration = 750 }: PixelRevealProps) {
   const [displayText, setDisplayText] = useState('')
@@ -69,7 +69,7 @@ export default function PixelReveal({ text, className, style, duration = 750 }: 
     >
       {/* Screen readers and crawlers get the real heading, never the █ placeholder */}
       <span className="sr-only">{text}</span>
-      <span aria-hidden="true">{reduceMotion ? text : displayText || text.replace(/[^\s]/g, '█')}</span>
+      <span aria-hidden="true">{reduceMotion ? text : displayText || text.replace(/[^\s]/g, '●')}</span>
     </h2>
   )
 }

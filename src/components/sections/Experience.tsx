@@ -97,7 +97,7 @@ export default function Experience() {
                   }}>
                     <span style={{
                       width: 6, height: 6, borderRadius: '50%', background: 'var(--gold)',
-                      boxShadow: '0 0 8px rgba(201,169,110,0.6)', display: 'inline-block',
+                      boxShadow: '0 0 8px rgba(56,189,248,0.65)', display: 'inline-block',
                     }} />
                     Current
                   </p>

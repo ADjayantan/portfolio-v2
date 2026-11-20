@@ -36,7 +36,7 @@ export default function About() {
           letterSpacing: '0.02em',
           maxWidth: 780,
           marginBottom: 72,
-          borderLeft: '2px solid rgba(201,169,110,0.25)',
+          borderLeft: '2px solid var(--gold-border)',
           paddingLeft: 32,
         }}>
           <TextReveal
@@ -60,8 +60,8 @@ export default function About() {
                 height: 260,
                 borderRadius: 24,
                 overflow: 'hidden',
-                boxShadow: '0 8px 40px rgba(0,0,0,0.55), 0 0 0 1px rgba(201,169,110,0.12)',
-                background: '#0b0b0b',
+                boxShadow: '0 8px 40px rgba(0,0,0,0.55), 0 0 0 1px var(--gold-border)',
+                background: '#080b14',
               }}
             />
             <p style={{

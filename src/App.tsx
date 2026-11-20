@@ -88,7 +88,7 @@ function PortfolioApp() {
           <DSA />
 
           {/* ── Bar divider (inverted — more sparse) ── */}
-          <BarDivider barCount={30} height={120} color="rgba(201,169,110,0.4)" />
+          <BarDivider barCount={30} height={120} color="rgba(56,189,248,0.4)" />
 
           {/* ── Skills ───────────────────────── */}
           <Skills />
@@ -100,7 +100,7 @@ function PortfolioApp() {
             speed={65}
             direction="left"
             fontSize="clamp(1rem, 2.5vw, 1.6rem)"
-            color="var(--muted)"
+            color="var(--text)"
             borderTop
             borderBottom
           />

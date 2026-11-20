@@ -92,11 +92,14 @@ export default function Navbar() {
           style={{
             background: 'none', border: 'none',
             fontFamily: 'var(--font-serif)', fontSize: '1.5rem',
-            fontWeight: 500, color: 'var(--gold)',
+            fontWeight: 500, color: scrolled ? 'var(--gold)' : 'var(--cream)',
+            textShadow: scrolled ? 'none' : '0 1px 12px rgba(5, 7, 15, 0.55)',
             letterSpacing: '0.08em', cursor: 'pointer', lineHeight: 1,
+            transition: 'color 0.3s, text-shadow 0.3s',
+            whiteSpace: 'nowrap',
           }}
         >
-          JAI
+          Jayantan AD
         </button>
 
         {/* Desktop nav */}
@@ -111,12 +114,13 @@ export default function Navbar() {
                   background: 'none', border: 'none',
                   fontFamily: 'var(--font-mono)', fontSize: 'var(--fs-2xs)',
                   letterSpacing: '0.22em', textTransform: 'uppercase',
-                  color: isActive ? 'var(--gold)' : 'var(--muted)',
-                  transition: 'color 0.2s', cursor: 'pointer',
+                  color: isActive ? 'var(--gold)' : (scrolled ? 'var(--muted)' : 'var(--cream)'),
+                  textShadow: scrolled ? 'none' : '0 1px 10px rgba(5, 7, 15, 0.55)',
+                  transition: 'color 0.2s, text-shadow 0.2s', cursor: 'pointer',
                   position: 'relative', padding: '4px 0',
                 }}
-                onMouseEnter={(e) => { if (!isActive) (e.currentTarget as HTMLElement).style.color = 'var(--text)' }}
-                onMouseLeave={(e) => { if (!isActive) (e.currentTarget as HTMLElement).style.color = 'var(--muted)' }}
+                onMouseEnter={(e) => { if (!isActive) (e.currentTarget as HTMLElement).style.color = 'var(--gold-light)' }}
+                onMouseLeave={(e) => { if (!isActive) (e.currentTarget as HTMLElement).style.color = scrolled ? 'var(--muted)' : 'var(--cream)' }}
               >
                 {l.label}
                 {/* Active underline */}

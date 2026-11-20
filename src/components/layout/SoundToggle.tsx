@@ -32,8 +32,8 @@ export default function SoundToggle() {
 
       ctx.beginPath()
       ctx.lineWidth = 1.0
-      ctx.strokeStyle = 'rgba(201, 169, 110, 0.7)' // soft gold
-      ctx.shadowColor = 'rgba(201, 169, 110, 0.5)'
+      ctx.strokeStyle = 'rgba(56, 189, 248, 0.75)' // atmosphere cyan
+      ctx.shadowColor = 'rgba(56, 189, 248, 0.5)'
       ctx.shadowBlur = 2
 
       const sliceWidth = 34 / bufferLength
