@@ -11,23 +11,7 @@ export const repoStats: Record<string, { stars: number; forks: number }> = {
     "stars": 0,
     "forks": 0
   },
-  "spam-sms": {
-    "stars": 0,
-    "forks": 0
-  },
   "leetflow": {
-    "stars": 0,
-    "forks": 0
-  },
-  "fraud-detection": {
-    "stars": 0,
-    "forks": 0
-  },
-  "smart-asset": {
-    "stars": 0,
-    "forks": 0
-  },
-  "devtrack": {
     "stars": 0,
     "forks": 0
   },
