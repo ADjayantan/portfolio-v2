@@ -2,15 +2,15 @@ import type { LeetCodeStats, GitHubStats } from '../types'
 
 // Automated daily update from LeetCode GraphQL API
 export const leetcodeStats: LeetCodeStats = {
-  "total": 276,
-  "easy": 174,
+  "total": 277,
+  "easy": 175,
   "medium": 80,
   "hard": 22,
   "contestRating": 1458,
   "globalRanking": 526693,
   "contestsAttended": 5,
   "topPercentage": 59.4,
-  "activeDays": 218,
+  "activeDays": 219,
   "maxStreak": 106,
   "badges": 3,
   "badgeNames": [
@@ -18,11 +18,11 @@ export const leetcodeStats: LeetCodeStats = {
     "100 Days Badge 2026",
     "50 Days Badge 2026"
   ],
-  "javaSolved": 263,
+  "javaSolved": 264,
   "topTopics": [
     {
       "tag": "Array",
-      "solved": 125
+      "solved": 126
     },
     {
       "tag": "String",
@@ -30,7 +30,7 @@ export const leetcodeStats: LeetCodeStats = {
     },
     {
       "tag": "Math",
-      "solved": 64
+      "solved": 65
     },
     {
       "tag": "Hash Table",
@@ -57,7 +57,7 @@ export const leetcodeStats: LeetCodeStats = {
 
 // Automated daily update from GitHub REST API
 export const githubStats: GitHubStats = {
-  "repos": 31,
+  "repos": 32,
   "followers": 3,
   "stars": 1,
   "forks": 0
